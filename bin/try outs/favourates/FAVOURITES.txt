@@ -1,0 +1,109 @@
+<HTML>
+<HEAD>
+<TITLE> FAVOURITES </TITLE>
+<BODY TEXT="black" BGCOLOR="black"  link="INDIGO" vlink="green" alink="red">
+<CENTER>
+<A NAME=TOP>
+<P ALIGN="RIGHT">
+<A HREF=#BOTTOM> GO TO THE BOTTOM !</A>
+</CENTER>
+</P>
+<br>
+<br>
+<br>
+<br>
+<A HREF="http://www.youtube.com" TARGET=NEW><font color="grey"><h2 align="center"> YOUTUBE </h2></A></font>
+<A HREF="http://www.youtube.com" TARGET=NEW><CENTER><IMG SRC="youtube.png"></CENTER></A>
+<br>
+<br>
+<br>
+<br>
+<A HREF="http://www.google.com" TARGET=NEW><font color="white"><h2 align="center"> GOOGLE </h2></A></font>
+<CENTER>
+<A HREF="http://www.google.com" TARGET=NEW><IMG SRC="google.jpg" height=300 width=500>
+</A>
+</CENTER>
+<br>
+<br>
+<br>
+<br>
+<A HREF="http://www.gmail.com" TARGET=NEW><font color="red"><h2 align="center"> GMAIL </h2></A></font>
+<CENTER>
+<A HREF="http://www.gmail.com" TARGET=NEW><IMG SRC="Gmail.png"></A>
+</CENTER>
+<br>
+<br>
+<br>
+<br>
+<A HREF="http://www.mangahit.com" TARGET=NEW><font color="brown"><h2 align="center"> mangahit...for anime's </h2></A></font>
+<CENTER>
+<A HREF="http://www.mangahit.com" TARGET=NEW><IMG SRC="manga.png" height=600 width=700></A></CENTER>
+<br><br><br><br>
+<A HREF="http://www.facebook.com" TARGET=NEW><font color="skyblue"><h2 align="center"> FACEBOOK </h2></A></font>
+<CENTER>
+<A HREF="http://www.facebook.com" TARGET=NEW><IMG SRC="facebook.jpg"></A>
+</CENTER>
+<br>
+<br>
+<br>
+<br>
+<A HREF="http://www.tvshow7.eu/watch-arrow-online" TARGET=NEW><font color="orange"><h2 align="center"> ARROW </h2></A></font>
+<CENTER>
+<A HREF="http://www.tvshow7.eu/watch-arrow-online" TARGET=NEW><IMG SRC="arrow.jpg"></A>
+</CENTER>
+<br>
+<br>
+<br>
+<br>
+<A HREF="http://www.tvshow7.com" TARGET=NEW><font color="green"><h2 align="center"> TV SHOWS </h2></A></font>
+<CENTER>
+<A HREF="http://www.tvshow7.eu" TARGET=NEW><IMG SRC="tvshow7.jpg"></A>
+</CENTER>
+<br>
+<br>
+<br>
+<br>
+<HR COLOR="INDIGO">
+<TABLE CELLSPACING="5" CELLPADDING="10" bgcolor="yellow" RULES="ALL" FRAME="BORDER">
+<TH COLSPAN="2">E.MAIL ADDRESSES</TH>
+<TR ALIGN="CENTER">
+<TD>NAME</TD>
+<TD>EMAIL</TD>
+</TR>
+<TR ALIGN="CENTER">
+<TD>BHAVIN</TD>
+<TD><A HREF="MAILTO:TANMAY50@HOTMAIL.COM">TANMAY50@HOTMAIL.COM</A></TD>
+</TR>
+<TR ALIGN="CENTER">
+<TD>VAISHALI</TD>
+<TD><A HREF="MAILTO:VAISHALI50@GMAIL.COM">VAISHALI50@HOTMAIL.COM</A></TD>
+</TR>
+<TR ALIGN="CENTER">
+<TD>TANMAY II</TD>
+<TD><A HREF="MAILTO:TANMAYSARAIYA@GMAIL.COM">TANMAYSARAIYA@GMAIL.COM.COM</A></TD>
+</TR>
+<TR ALIGN="CENTER">
+<TD>TANMAY I</TD>
+<TD><A HREF="MAILTO:TANMAY_PUNE6@YAHOO.COM">TANMAY_PUNE6@YAHOO.COM</A></TD>
+</TR>
+<TR ALIGN="CENTER">
+<TD>SAHIL</TD>
+<TD><A HREF="MAILTO:SAHIL.M.SALEEM@GMAIL.COM">SAHIL.M.SALEEM@GMAIL.COM</A></TD>
+</TR>
+<TR ALIGN="CENTER">
+<TD text="black">SAJJAD</TD>
+<TD><A HREF="MAILTO:SAJJADAZEEM@GMAIL.COM">SAJJADAZEEM@GMAIL.COM</A></TD>
+</TR>
+</TABLE>
+<A NAME=BOTTOM>
+<CENTER>
+<A HREF=#TOP>
+GO TO THE TOP OF THE PAGE 
+</A>
+</CENTER>
+<BR>
+<BR>
+<BR>
+<BR>
+</BODY>
+</HTML>

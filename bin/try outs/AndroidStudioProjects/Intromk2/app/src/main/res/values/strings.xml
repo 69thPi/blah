@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">intro mk2</string>
+    <string name="firstaid">first aid</string>
+    <string name="fracture">Encourage the person to support the injury with their hand, or use a cushion or items of clothing to prevent unnecessary movement.
+        As soon as possible, call 999 or get someone else to do it.
+        Continue supporting the injury until help arrives.
+        </string>
+    <string name="stroke">Think FAST. Face: is there weakness on one side of the face? \n
+        Arms: can they raise both arms?\n
+        Speech: is their speech easily understood?
+        \nImmediately call 999 or get someone else to do it.</string>
+    <string name="poison">Establish what they have taken.\n
+        When? And how much?\n
+        if possible gargle with extra salty water to vomit out poison.\n
+        As soon as possible, call 999 or get someone else to do it.\n
+        Do not make the person sick.</string>
+    <string name="burns">Cool the burn under cold running water for at least ten minutes.\n
+    Loosely cover the burn with cling film or a clean plastic bag.\n
+    If necessary, call 999 or get someone else to do it.</string>
+    <string name="bleed">Put pressure on the wound with whatever is available to stop or slow down the flow of blood.\n
+        As soon as possible, call 999 or get someone else to do it.\n
+        keep pressure till help arrives.</string>
+    <string name="uncon">Check breathing by tilting their head backwards and looking and feeling for breaths.\n
+        Call 999 as soon as possible, or get someone else to do it.\n
+        Push firmly downwards in the middle of the chest and then release.\n
+        Push at a regular rate until help arrives.</string>
+</resources>

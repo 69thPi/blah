@@ -1,0 +1,14 @@
+spinning wheel selector
+change color for specific displays
+change color when button is pressed
+quotes like spend wisely
+7 themes for 7 diff days
+* if display is larger than can accomodate then reduce size to fit
+-music
+-tracker of money==interaction btn phones //for diff clients
+-personal bank
+-quick calc
+-SOS//send sms to any emergency contact//along with location//w/o using internet
+(bluetooth location from nearby devices)
+-facebook/twitter posts 
+-currency conversoin 
