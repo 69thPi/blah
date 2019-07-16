@@ -1,0 +1,340 @@
+<html>
+<head>
+<title> test </title>
+<link href="https://fonts.googleapis.com/css?family=Averia+Sans+Libre:400,700|Averia+Serif+Libre|Roboto+Slab|Berkshire+Swash|Fredericka+the+Great|Kranky|Kadwa|Kalam&display=swap" rel="stylesheet">
+
+<style>
+
+html{
+	scroll-behavior:smooth;
+	color:white;
+}
+
+body{
+	background-color: black;
+	margin: 0px;
+}
+
+#intro{
+	border: 2px solid black;
+	width:98.5vw;
+	height: 100vh;
+	background: url('res/back_alien.jpg') no-repeat;
+	opacity:0.5;
+}
+
+#intro img{
+	position:absolute;
+	top:17.6%;
+	width:99.7%;
+}
+
+#intro p{
+	color:black;
+	position: absolute;
+	top:52%;
+	left:3%;
+	text-align: center;
+	font-size: 500%;
+	font-family: 'Kranky', cursive;
+	z-index: 2;
+}
+
+#intro pre{
+	color: black;
+	position: absolute;
+	top:65%;
+	right:5%;
+	text-align: center;
+	font-size: 500%;
+	font-family: 'Fredericka the Great', cursive;
+	z-index: 2;
+}
+
+a{
+	background-color:rgb(50,80,100);
+	padding:1.1vw 3vw;
+	text-align:center;
+	text-decoration:none;
+	color:white;
+	font-family: 'Kalam', cursive; /*"Comic Sans MS", cursive, sans-serif;*/
+	outline: 0.3vw dashed rgb(250, 95, 106);
+	outline-offset: -0.3vw;
+	margin:0vw 1.5vw 0vw 1.5vw;
+}
+
+#NavBar{
+	background-color:rgba(0, 0, 0,0.2);
+	text-align:center;
+	padding:2vw;
+	position:sticky;
+	top:0;
+	z-index: 2;
+	border-radius: 0px 0px 50px 50px;
+}
+
+#content1{
+	border:1px solid white;
+	height: 99vh;
+	background-image:url("res/blue.jpg");
+	background-size: cover;
+	position: relative;
+	opacity: 0.8;
+}
+
+#author{
+	position:absolute;
+	top:20%;
+	left:55%;
+	height:45%;
+	width:25%;
+	transform: rotate(90deg);
+}
+
+
+div.text{
+	color: black;
+	height:70%;
+	width:40%;
+  position:absolute;
+	top:23%;
+	left: 5%;
+	word-wrap:break-word;
+	text-align: justify;
+	font-size: 110%;
+	font-family: 'Roboto Slab', serif;
+	padding: 5px;
+}
+
+div.title{
+	position:absolute;
+	top:15%;
+	left:5%;
+	width:40%;
+	word-wrap:break-word;
+	font-size: 200%;
+	font-family: 'Averia Sans Libre', cursive;
+	padding: 5px;
+	text-align:center;
+	color: black;
+}
+#content2{
+	border:1px solid white;
+	height: 99vh;
+	background-image:url("res/green.jpg");
+	background-size: cover;
+	position: relative;
+	opacity: 0.8;
+}
+
+#content3{
+	border:1px solid white;
+	height: 99vh;
+	background-image:url("res/gold.jpg");
+	background-size: cover;
+	position: relative;
+	opacity: 0.8;
+}
+
+#content4{
+	border:1px solid white;
+	word-wrap:break-word;/*<!-- or normal-->*/
+	height: 99vh;
+	position: relative;
+	background-image:url("res/redPink.jpg");
+	background-size: cover;
+	opacity: 0.8;
+}
+
+#content5{
+	height: 99vh;
+	position: relative;
+	background-image:url("res/neo.jpg");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+</style>
+<meta name="viewport" content="width=device-width, intial-scale=1.0">
+</head>
+
+
+<body>
+<div id="intro">
+<img src="res/front.png">
+<img src="res/rocket.png">
+<p>A Telescopic Spaceship,</p>
+<pre>.....apparently!</pre>
+</div>
+
+<div id="NavBar">
+<a href=#content1 onmouseover="style='outline-offset:0.2vw;'" onmouseout="style='outline-offset:-0.3.;'"> Introduction </a>
+<a href=#content2 onmouseover="style='outline-offset:0.2vw;'" onmouseout="style='outline-offset:-0.3.;'"> Goals </a>
+<a href=#content3 onmouseover="style='outline-offset:0.2vw;'" onmouseout="style='outline-offset:-0.3.;'"> Projects </a>
+<a href=#content4 onmouseover="style='outline-offset:0.2vw;'" onmouseout="style='outline-offset:-0.3.;'"> Skills & Interests </a>
+<a href=#content5 onmouseover="style='outline-offset:0.2vw;'" onmouseout="style='outline-offset:-0.3.;'"> Contact </a>
+</div>
+
+<div align="right" style="position:sticky; top:90vh;z-index:2;"><!-- or 42vw-->
+
+<a href=#intro style="padding:1vw 2vw;margin-right:4vw;outline:none;background-color:DodgerBlue;border-radius:7vw;border:5px solid white;">back to top</a>
+</div>
+
+<div id="content1">
+	<div class="title">
+		The Reference Frame
+	</div>
+	<div class="text" >
+		<p style="font-family: 'Berkshire Swash', cursive;font-size:115%; line-height:1.5; letter-spacing:1px;">
+				A 21 year old explorer --in the market to find a ship as it were.</p>
+
+		<p>
+			 He grew up in the city of Dubai, graduated high school
+			 with a degree in science. Unfortunately, it was too late by then.
+			 He had been lost to the world of science fiction created by
+			 <b>Gene Roddenberry</b> and aspired "To Go Where No Man Has Gone Before".
+			 So, he began his journey to understand the principles of engineering
+			 at the <b>National Institute of Technology- Surat, India.</b> There he enlisted
+			 in a hobby club; where he would then spend most of his undergraduate
+			 years making robots and R/C planes. His attitude and outlook on
+			 life often inspired young minds to go out there and do their bit.
+			 He has worked on several interdisciplinary projects that have given
+			 him a variety of skills. With this motivation and enthusiam he
+			 looks forward to discering the secrets of our universe.
+ 	 </p>
+ </div>
+	<div id="author">
+		<img src="res/portrait.jpg" height="100%" style="border:10px solid white; outline:5px solid black;" >
+	</div>
+	<div id="ImgDesc">
+		<pre style="position:absolute; top:80%; left:58%; color:black; font-family:'Kalam', cursive; font-size:120%;">  Author   : Tanmay Saraiya
+  Estd. since Oct '97.
+  Education : Mechanical Engineer</pre>
+	</div>
+</div>
+<p></p>
+<div id="content2">
+		<div class="title" style="top:18%;">
+			A Crazy Idea...
+		</div>
+		<div class="text" style="top:23%; left:15%; width:70%;">
+			<p>
+				We are born explorers and we do all it in one way or another.
+				It is in that one moment; how we percieve and react to
+				uncharted situations that keeps us alive. I believe in working
+				for that moment. To simplify, if I were to bartend I'd use automated jets
+				to shoot projectiles into the pitcher. The dream job would be to design and
+				develop	rocket engines that allow us to wander deeper into the cosmos.
+		 </p>
+		 <p>
+			 	Personally, I love to watch movies/anime, read manga, play the keyboard,
+				try out new	places and it's food. These keep me humble, relaxed and
+				confident to go	out and do new things. I also keep an eye for the
+				curves in nature and try to etch them out on a sheet of paper,
+				usually in an hour or so!	The thing that I enjoy the most is the
+				reactions people give	to my work and I find stories an effective
+				way to take a test drive of people's emotions. However, nothing
+				compares to learning something new; be it a skill or a concept and
+				brainstorming to make something new out of it. Yup! That's the winner
+				right there. To cap it all off	there's nothing a good swim can't fix!
+			</p>
+			<p style="border:2px solid red; position:absolute; top:55% ;left:-10%; width:120%; font-family: 'Fredericka the Great', cursive; font-size:250%; text-align:center;">
+				At the end of a day your feet should be dirty,
+				hair messy and there will be a sparkle in your eyes ...forever!!
+			</p>
+		</div>
+</div>
+<p></p>
+<div id="content3">
+		<div class="title">
+			HEADDER.
+		</div>
+		<div class="text">
+			<p>
+
+				h
+				DRISHTI and skills
+					Projects:
+					1. Aero Club
+					Water rocket:
+					Investigation of making solid fuel rocket engines:
+					Design of R/C planes and gliders
+					Basic robots
+					Line follower bots
+
+		 </p>
+		</div>
+</div>
+<p></p>
+<div id="content4">
+	<div class="title" style="left:0%;">
+		Skills
+	</div>
+	<div class="title" style="left:50%;">
+		Interests
+	</div>
+	<div class="text" style="top:20%; left:7%;">
+				<ul style="list-style:none;">
+					<li>Electronics</li>
+					<ul style="list-style:disc;">
+						<li>Soldering</li>
+				  	<li>Microcontroller Programming</li>
+				  	<li>Sensor/Actuator Interfacing</li>
+					</ul>
+					<li>Design & Analysis</li>
+					<ul style="list-style:disc;">
+						<li>Solid-Works</li>
+						<li>Ansys- fluent</li>
+					</ul>
+				  <li>Rapid Prototyping</li>
+						<ul style="list-style:disc;">
+							<li> Wood Working</li>
+							<li> Metal Turning</li>
+							<li> 3D Printing</li>
+						</ul>
+					<li>Computer </li>
+						<ul style="list-style:disc;">
+							<li>C++,C , pyhton, Java, HTML, CSS </li>
+							<li>Adobe Photoshop</li>
+				  		<li>Software & Hardware troubleshooting</li>
+						</ul>
+					<li>Basic Maintenace & troubleshooting</li>
+					</ul>
+	</div>
+	<hr style="height:50%; width:0px; position:relative; top:25%; left:-2%;">
+	<div class="text" style="left:55%">
+				<p> Aerospace Propulsion </p>
+					<ul>
+						<li>Solid Fuel Engines</li>
+						<li>Bi-propellant Liquid Fuels Engines</li>
+						<li>Hybrid Engines</li>
+						<li>Electric Engines</li>
+					</ul>
+				<p>Aerodynaimics</p>
+				<ul>
+					<li>Fluid interaction with bodies</li>
+					<li>Jet streams.</li>
+				</ul>
+				<p>Internet of Things</p>
+				<ul>
+					<li> Human detection </li>
+					<li> Voice controlled Systems</li>
+				</ul>
+	</div>
+</div>
+<p></p>
+<div id="content5">
+		<div class="title" style="color:white;">
+			CONNECT
+		</div>
+		<div class="text" style="color:white; font-family: 'Averia Serif Libre', cursive;">
+			<p>
+				Reaching Me...
+	 	  </p>
+	 	</div>
+</div>
+
+
+\Viewed Best with chrome.
+</body>
+</html>

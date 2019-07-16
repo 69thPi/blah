@@ -1,0 +1,73 @@
+/*
+  This program is made to keep a track on the attendance of students.
+  this features:-
+  calc. the attendance perc.
+  noting the days of absence
+  keeping a reminder if the perc is lower than 75%
+*/
+///will require a class day to allow the user to enter the present or absent per subject.
+///will require a function to create/modify a file with the absentees dates per subject.
+///if absent will require a function to chk wch subject he was absent to modify and enter the date
+///if user enters 'B' for mass bunk will be counted as absent but will be also noted as wch day and subject it was.
+
+
+#include <iostream>
+#include<ctime>
+#include<time.h>
+#include <stdio.h>
+#include<string.h>
+
+using namespace std;
+
+class day
+{
+    char *sub1;
+    char *sub2;
+    char *sub3;
+    char *sub4;
+    char *prac1;
+    char *prac2;
+public:
+    day()
+    {
+        strcpy(sub1," ");
+        strcpy(sub2," ");
+        strcpy(sub3," ");
+        strcpy(sub4," ");
+        strcpy(prac1," ");
+        strcpy(prac2," ");
+    }
+    void enter_data();
+    void copy_data(int p,int t /*date of absentee*/); ///used to copy data of sub to subject
+};
+class subject:public day
+{
+    int present;         ///present days
+    int total;           ///total classes
+    struct tm *date;     ///to write date of absentee
+public:
+    void writefile();    ///to save data
+};
+
+float math=0,comp=0,eng=0,ec=0,et=0,bms=0,comp_p=0,ec_p=0,workshop=0,bms_p=0;/// BMS ET EC
+///   math   comp   ebglish         mech stdy
+
+
+void run_time()
+{
+    
+}
+
+
+
+
+
+
+
+
+
+
+int main()
+{
+  cout<<"runs";
+}

@@ -1,0 +1,71 @@
+#include<iostream>
+
+using namespace std;
+
+void conv_dec_hex(int ascii)
+{
+   while(ascii>0)
+   {
+       long int num=ascii%16;
+       switch(num)
+       {
+       case 10:cout<<"A";
+        break;
+       case 11:cout<<"B";
+        break;
+       case 12:cout<<"C";
+        break;
+       case 13:cout<<"D";
+        break;
+       case 14:cout<<"E";
+        break;
+       case 15:cout<<"F";
+        break;
+       default:cout<<num;
+       break;
+       }
+       ascii/=16;
+   }
+}
+
+void conv_dec_bin(int ascii)
+{
+    while(ascii>0)
+    {
+        cout<<ascii%2;
+        ascii/=2;
+    }
+}
+
+void input(char inp)
+{
+  cout<<"ASCII:"<<int(inp)<<endl;
+  cout<<"BINARY:";
+  conv_dec_bin(inp);
+  cout<<endl;
+  cout<<"HEX:";
+  conv_dec_hex(inp);
+  cout<<endl;
+}
+
+int main()
+{
+    char msg[]="tanmay";
+    cout<<"ASCII:"<<endl;
+    for(int i=0;msg[i]!='\0';i++)
+        {
+            cout<<int(msg[i])<<" ";
+        }
+        cout<<endl<<"B!NaRy:"<<endl;
+    for(int i=0;msg[i]!='\0';i++)
+        {
+              conv_dec_bin(msg[i]);
+              cout<<" ";
+        }
+        cout<<endl<<"HeX:"<<endl;
+    for(int i=0;msg[i]!='\0';i++)
+        {
+              conv_dec_hex(msg[i]);
+              cout<<" ";
+        }
+}

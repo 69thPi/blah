@@ -1,0 +1,1 @@
+this program is to keep track of n students in a particular subject.

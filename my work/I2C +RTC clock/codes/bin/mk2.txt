@@ -1,0 +1,61 @@
+/*
+ * mark2
+ * SDD.c
+ * my first working ssd program to count from 0-9->0
+ * Created: 1/30/2016 5:27:57 PM
+ * Author : Tanmay
+ */ 
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+int display(int n)
+{
+	switch(n)
+	{
+		case 0:return 0b00111111;
+		       break;
+	    case 1:return 0b00000110;
+			  break;
+		case 2:return 0b01011011;
+			  break;
+		case 3:return 0b01001111;
+			  break;
+		case 4:return 0b01100110;
+			  break;
+		case 5:return 0b01101101;
+			  break;
+		case 6:return 0b01111101;
+			  break;
+		case 7:return 0b00000111;
+				break;
+		case 8:return 0b01111111;
+				break;
+		case 9:return 0b01101111;
+				break;
+			}
+}
+
+int main(void)
+{
+	DDRD=0xFF;
+	DDRB=0xFF;
+	PORTD=0x00;
+	PORTB=0x00;
+    /* Replace with your application code */
+    while (1) 
+    {
+		int cp=0,ctr=0;
+		for(int i=0;i<10;i++)
+		{
+		   PORTD=display(i);
+		   PORTB=0<<cp;
+		   _delay_ms(1000);
+		   //cp++;
+		   ctr++;
+		}
+		if(ctr==1000)
+		break;
+    }
+}
+

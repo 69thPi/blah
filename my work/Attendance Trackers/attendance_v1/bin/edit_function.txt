@@ -1,0 +1,35 @@
+void attn::edit()
+{
+    system("cls");
+    dispAllSubs();
+    int ch;
+    cin>>ch;
+    ch--;
+    char dat[10];
+    cout<<"enter the date of attendance:(dd-mm-yyyy)\n>>";
+    gets(ig);
+    gets(dat);
+    int d=(dat[0]-48)*10+(dat[1]-48);
+    int m=(dat[3]-48)*10+(dat[4]-48);
+    int y=(dat[6]-48)*1000+(dat[7]-48)*100+(dat[8]-48)*10+(dat[9]-48);
+    fstream edit("attendance.dat",ios::binary|ios::in|ios::out);
+    attn gain;
+    while(edit.read((char*)&gain,sizeof(attn)))
+    {
+        gain.disp();
+        cout<<temp[ch]<<endl;
+        if(gain.match(d,m,y,temp[ch])==1)
+           {
+              cout<<edit.tellg()<<endl;
+              edit.seekg(-1*sizeof(attn),ios::cur);
+              
+              edit.write((char*)&gain,sizeof(attn));
+              break;
+           }
+        else
+           {
+               cout<<"match not found"<<endl;
+           }
+    }
+    edit.close();
+}

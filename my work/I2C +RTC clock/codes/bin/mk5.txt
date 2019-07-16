@@ -1,0 +1,44 @@
+//DFLIP-FLOP CODE
+//CP AT PB0
+//PINOUT AT PB1
+/*
+ * mark 5
+ * flipflop.c
+ *
+ * Created: 5/31/2016 7:50:16 PM
+ * Author : Tanmay
+ */ 
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+int main(void)
+{
+	// CP port b pin0
+	//inp on port b pin1
+	//pin 1 for led glows on and off every 0.5 sec
+	//cp changes every 0.5 sec after changin pin inp
+	DDRB=0b00000011;
+	PORTB=0b00000001;
+	int on=0;
+	while(1)
+	{
+		if(on==0)//LOW
+		{
+			on=1;//set ON=true;
+			PORTB=0b00000011;//new value set HIGH
+			PORTB=0b00000010;//cp low//takes inp here
+			_delay_ms(500);
+			PORTB=0b00000011;//cp back to high again
+		}
+		else if(on==1)
+		{
+			on=0;//set ON=false;
+			PORTB=0b00000001;//new value set LOW
+			PORTB=0b00000000;//cp low//takes inp here
+			_delay_ms(500);
+			PORTB=0b00000001;//cp back to high again
+		}
+	}
+}
+

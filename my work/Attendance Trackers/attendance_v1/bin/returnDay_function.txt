@@ -1,0 +1,21 @@
+char *day()
+{
+ struct tm *node;
+ time_t tim;
+ time(&tim);
+ node=localtime(&tim);
+ switch(node->tm_wday)
+ {
+    case 1:return "monday";
+            break;
+    case 2:return "tuesday";
+            break;
+    case 3:return "wednesday";
+            break;
+    case 4:return "thursday";
+            break;
+    case 5:return "friday";
+            break;
+    default:return "holiday";
+ }
+}

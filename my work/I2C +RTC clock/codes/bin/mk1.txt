@@ -1,0 +1,73 @@
+/*
+ * mark1
+ * SSD countdown.c
+ * countdown from 15
+ * Created: 1/20/2016 5:01:15 PM
+ * Author : Tanmay
+ */ 
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+void counter()
+{
+  int digits[2]={2,0};
+  for(int i=0;i<2;i++)
+  {
+	 PORTC=(1<<i);
+	 display(digits[i]);
+	 _delay_ms(600);
+	 PORTC=(0<<i); 
+  } 
+}
+
+void display(int n)
+{
+	DDRB=0xFF;
+	PORTB=0xFF;
+	switch(n)
+	{
+		case 0:
+		PORTB=0b11011101;
+		break;
+		case 1:
+		PORTB=0b01010000;
+		break;
+		case 2:
+		PORTB=0b10011011;
+		break;
+		case 3:
+		PORTB=0b11011010;
+		break;
+		case 4:
+		PORTB=0b01010110;
+		break;
+		case 5:
+		PORTB=0b11001110;
+		break;
+		case 6:
+		PORTB=0b11001111;
+		break;
+		case 7:
+		PORTB=0b01011000;
+		break;
+		case 8:
+		PORTB=0b11011111;
+		break;
+		case 9:
+		PORTB=0b11011110;
+		break;
+		default:
+		PORTB=0xFF;
+		
+	}
+}
+int main(void)
+{
+    /* Replace with your application code */
+    while (1) 
+    {
+		counter();
+    }
+}
+

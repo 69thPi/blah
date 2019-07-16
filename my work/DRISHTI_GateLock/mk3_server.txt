@@ -1,0 +1,140 @@
+/*
+ * DRISHTI_GateLock.c
+ *
+ * Created: 9/30/2018 2:31:26 PM
+ * Author : Tanmay
+ * if card is tagged when the lab is closed then -IF the card has access level then open the key safe else (or sound buzzer), 
+ * now if the access level is cleared LAB= open and toggle cards status; and then all others status are toggled 
+ * between exit and entry. (while toggling for exit every time check if the person exiting is the last)-+-if is the last then open safe
+ * and after 5 second delay (which marks key is put inside) close the safe and LAB=off .
+ 
+if card of unknown freq is swiped nothing will happen it will read the card and then check with database and since no data matched
+it will not do anything.(however it will read it)!
+
+ DIRECTIONS OF USE:-
+ always give priority to entry- if there are people one to enter and second to exit>> entry tags first
+ hitting the reset button will change the condition to lab is closed.
+ anyone(last to leave) can close the lab but only the authorized people can open the lab. 
+ 
+ */ 
+
+#define F_CPU 8000000UL
+
+#include <avr/io.h >
+#include <avr/interrupt.h >
+#include <util/delay.h>
+#include <string.h>
+#include "USART_32.h"
+
+char *ref_id;
+char *save;
+int locker=0,LAB=0,last_man=0;
+int Data_Rx=0;
+unsigned char x=0;
+
+void rx_Str()
+{
+	char x;
+	int i=0;
+	x=USART_Receive();
+	if((int)x!= 13) //13= null
+	{
+		ref_id[i++] = x;
+		rx_Str();
+	}
+	ref_id[i] = '\0';
+}
+
+void locker_actuate(int work)
+{
+	if(work==1);//open the locker
+	if(work==0);//close the locker
+}
+
+void buzzer()
+{
+	
+}
+
+int main()
+{
+	USART_InterruptEnable(); //USART funciton in <UART mode>
+	sei();
+	USART_Init(51);
+	//LED RED ON GREEN OFF
+	//when interrupt is called the data is read
+	while(1)
+	{
+		if(Data_Rx==1)//data receive from RFID reader
+		{
+			cli();
+			rx_Str();
+			//beep(DATA READ);
+			//_delay_ms(500);  // to visualize recognition
+			if(locker==1)//if locker is open
+			{
+				if(strcmp(ref_id,save)==0)
+				{
+					locker_actuate(0);//close the locker
+					strcpy(save,"");//erase the card used to open the safe
+					locker=0;//locker is closed				
+				}
+			}
+			else
+				USART_TransmitString(ref_id);
+			sei();			//allow sever interrupt to be called.
+		}
+		//on server as string is recieved check if value exists and toggle if it does.
+		//return c if toggled normal
+		//return a if toggled authorised
+		//return n if not found
+		//if last man staus = in then toggle off and return count as 1;
+		//FRIST SEND BACK THE LAST MAN VALUE THEN THE CARD ACCESS STATUS
+		if(Data_Rx==2)//data receive from server on second RX pin
+		{
+			char val;
+			while((int)USART_Receive()!=13)//to check the card access
+			{
+				val=USART_Receive();
+				if(val=='y')
+				 last_man=1;
+			}
+			if(LAB==0 && last_man==0)//!lastman();
+			{
+				if(val=='a')
+				{
+					locker_actuate(1);//authorised to open
+					strcpy(save,ref_id);
+				}
+				else
+					buzzer();//not authorized to open
+			}
+			else if(LAB==1)
+			{
+				if(val=='a' || val=='c')
+				{
+					if(last_man==1)
+					{
+						strcpy(save,ref_id);
+						locker_actuate(1);// open locker to close lab
+						LAB=0;//lab closed
+					}
+				}
+			}
+			
+		}
+	}
+	
+}
+
+ISR (USART0_RX_vect)
+{
+	Data_Rx=1;	
+}
+
+ISR (USART1_RX_vect)
+{
+	Data_Rx=2;
+}
+
+

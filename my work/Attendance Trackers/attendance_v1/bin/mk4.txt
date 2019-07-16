@@ -1,0 +1,635 @@
+#include <iostream>
+#include <fstream>
+#include <ctime>
+#include <time.h>
+#include <stdio.h>
+
+using namespace std;
+
+tm* get_node()
+{
+  time_t tym;
+  tm *node;
+  time(&tym);
+  node=localtime(&tym);
+  return node;
+}
+	bool math=false;
+	bool comp=false;
+	bool et=false;
+	bool ec=false;
+	bool bms=false;
+	bool english=false;
+	bool comp_p=false;
+	bool ec_p=false;
+	bool wrk=false;
+	bool prac=false;
+
+class subject
+{
+	int T;
+	int P;
+	int A;
+	int bunk;
+	int dd,mm,yyyy;
+public:
+	subject()
+	{
+	T=0,P=0,A=0;
+	dd=0,mm=0,yyyy=0;
+	bunk=0;//0==false
+	}
+	void write_class(int,char);
+	void display()
+	{
+		cout<<"total :"<<T<<endl;
+		cout<<"Present :"<<P<<endl;
+		cout<<"Absent:"<<A<<endl;
+		cout<<"Date :"<<dd<<mm<<yyyy<<endl;
+	}
+};
+subject m,c,e,ets,ecs,bmss,cp,ecp,wrks,pracs;
+
+	void subject::write_class(int n,char p)//write file//of subject with TAPB
+	{
+	 if(p=='p' ||p=='P')
+	 {
+	 switch(n)
+	 {
+	 case 1:m.P++;
+		    m.T++;
+			break;
+	 case 2:c.P++;
+		    c.T++;
+			break;
+	case 3:ets.P++;
+		    ets.T++;
+			break;
+	case 4:ecs.P++;
+		    ecs.T++;
+			break;
+	case 5:bmss.P++;
+		    bmss.T++;
+			break;
+	case 6:e.P++;
+		    e.T++;
+			break;
+	case 7:cp.P++;
+		    cp.T++;
+			break;
+	case 8:ecp.P++;
+		    ecp.T++;
+			break;
+	case 9:wrks.P++;
+		    wrks.T++;
+			break;
+	case 10:pracs.P++;
+			pracs.T++;
+			break;
+	 }
+	}
+	 else if(p=='a' ||p=='A' || p=='b' ||p=='B')
+     {
+	 switch(n)
+	 {
+	 case 1:m.A++;
+		    m.T++;
+			if(p=='b' ||p=='B')
+			{
+				m.bunk=1;
+				m.dd=get_node()->tm_mday;
+				m.mm=get_node()->tm_mon+1;
+				m.yyyy=get_node()->tm_year+1900;
+			}
+			break;
+	 case 2:c.A++;
+		    c.T++;
+			if(p=='b' ||p=='B')
+			{
+				c.bunk=1;
+				c.dd=get_node()->tm_mday;
+				c.mm=get_node()->tm_mon+1;
+				c.yyyy=get_node()->tm_year+1900;
+			}
+			break;
+	case 3:ets.A++;
+		    ets.T++;
+			if(p=='b' ||p=='B')
+			{
+				ets.bunk=1;
+				ets.dd=get_node()->tm_mday;
+				ets.mm=get_node()->tm_mon+1;
+				ets.yyyy=get_node()->tm_year+1900;
+			}
+			break;
+	case 4:ecs.A++;
+		    ecs.T++;
+			if(p=='b' ||p=='B')
+			{
+				ecs.bunk=1;
+				ecs.dd=get_node()->tm_mday;
+				ecs.mm=get_node()->tm_mon+1;
+				ecs.yyyy=get_node()->tm_year+1900;
+			}
+			break;
+	case 5:bmss.A++;
+		    bmss.T++;
+			if(p=='b' ||p=='B')
+			{
+				bmss.bunk=1;
+				bmss.dd=get_node()->tm_mday;
+				bmss.mm=get_node()->tm_mon+1;
+				bmss.yyyy=get_node()->tm_year+1900;
+			}
+			break;
+	case 6:e.A++;
+		    e.T++;
+			if(p=='b' ||p=='B')
+			{
+				e.bunk=1;
+				e.dd=get_node()->tm_mday;
+				e.mm=get_node()->tm_mon+1;
+				e.yyyy=get_node()->tm_year+1900;
+			}
+			break;
+	case 7:cp.A++;
+		    cp.T++;
+			if(p=='b' ||p=='B')
+			{
+				cp.bunk=1;
+				cp.dd=get_node()->tm_mday;
+				cp.mm=get_node()->tm_mon+1;
+				cp.yyyy=get_node()->tm_year+1900;
+			}
+			break;
+	case 8:ecp.A++;
+		    ecp.T++;
+			if(p=='b' ||p=='B')
+			{
+				ecp.bunk=1;
+				ecp.dd=get_node()->tm_mday;
+				ecp.mm=get_node()->tm_mon+1;
+				ecp.yyyy=get_node()->tm_year+1900;
+			}
+			break;
+	case 9:wrks.A++;
+		    wrks.T++;
+			if(p=='b' ||p=='B')
+			{
+				wrks.bunk=1;
+				wrks.dd=get_node()->tm_mday;
+				wrks.mm=get_node()->tm_mon+1;
+				wrks.yyyy=get_node()->tm_year+1900;
+			}
+			break;
+	case 10:pracs.A++;
+			pracs.T++;
+			if(p=='b' ||p=='B')
+			{
+				pracs.bunk=1;
+				pracs.dd=get_node()->tm_mday;
+				pracs.mm=get_node()->tm_mon+1;
+				pracs.yyyy=get_node()->tm_year+1900;
+			}
+			break;
+	 }
+	}
+	}
+
+	void monday()
+	{
+		math=true;
+		comp=true;
+		et=true;
+		ec=true;
+	}
+	void tuesday()
+	{
+	    comp=true;
+		et=true;
+		bms=true;
+		math=true;
+		ec_p=true;
+		comp_p=true;
+	}
+	void wednesday()
+	{
+		english=true;
+		bms=true;
+		et=true;
+		ec=true;
+	}
+	void thursday()
+	{
+		bms=true;
+		math=true;
+		english=true;
+		wrk=true;
+	}
+	void friday()
+	{
+		ec=true;
+		et=true;
+		comp=true;
+		math=true;
+		prac=true;
+	}
+
+
+	void read_file(int n)
+	{
+		
+		if(n==1)
+		{
+				ifstream fin("math.bin",ios::binary);
+				while(fin.read((char*)&m,sizeof(&m)))
+				fin.read((char*)&m,sizeof(&m));
+				fin.close();
+		}
+		else if(n==2)
+		{
+				ifstream fin("comp.bin",ios::binary);
+				while(fin.read((char*)&c,sizeof(&c)))
+				fin.read((char*)&c,sizeof(&c));
+		        fin.close();
+		}
+		else if(n==3)
+		{
+				ifstream fin("ET.bin",ios::binary);
+				while(fin.read((char*)&ets,sizeof(&ets)))
+				fin.read((char*)&ets,sizeof(&ets));
+				fin.close();
+		}
+		else if(n==4)
+		{
+				ifstream fin("EC.bin",ios::binary);
+				while(fin.read((char*)&ets,sizeof(&ets)))
+				fin.read((char*)&ecs,sizeof(&ecs));
+				fin.close();
+		}
+		else if(n==5)
+		{
+				ifstream fin("B_M_S.bin",ios::binary);
+				while(fin.read((char*)&bmss,sizeof(&bmss)))
+				fin.read((char*)&bmss,sizeof(&bmss));
+				fin.close();
+		}
+		else if(n==6)
+		{
+				ifstream fin("ENGLISH.bin",ios::binary);
+				while(fin.read((char*)&e,sizeof(&e)))
+				fin.read((char*)&e,sizeof(&e));
+				fin.close();
+		}
+		else if(n==7)
+		{
+				ifstream fin("COMP_PRAC.bin",ios::binary);
+				while(fin.read((char*)&cp,sizeof(&cp)))
+				fin.read((char*)&cp,sizeof(&cp));
+		        fin.close();
+		}
+		else if(n==8)
+		{
+				ifstream fin("EC_PRAC.bin",ios::binary);
+				while(fin.read((char*)&ecp,sizeof(&ecp)))
+				fin.read((char*)&ecp,sizeof(&ecp));
+				fin.close();
+		}
+		else if(n==9)
+		{
+				ifstream fin("WORKSHOP.bin",ios::binary);
+				while(fin.read((char*)&wrks,sizeof(&wrks)))
+				fin.read((char*)&wrks,sizeof(&wrks));
+				fin.close();
+		}
+		else if(n==10)
+		{
+				ifstream fin("PRACTICALS.bin",ios::binary);
+				while(fin.read((char*)&pracs,sizeof(&pracs)))
+				fin.read((char*)&pracs,sizeof(&pracs));
+				fin.close();
+		}		
+	} 
+	void write_file(int n)
+	{
+		if(n==1)
+		{
+				ofstream fout("math.bin",ios::binary|ios::app);
+				fout.write((char*)&m,sizeof(&m));
+				fout.close();
+		}
+		else if(n==2)
+		{
+				ofstream fout("comp.bin",ios::binary|ios::app);
+				fout.write((char*)&c,sizeof(&c));
+		        fout.close();
+		}
+		else if(n==3)
+		{
+				ofstream fout("ET.bin",ios::binary|ios::app);
+				fout.write((char*)&ets,sizeof(&ets));
+				fout.close();
+		}
+		else if(n==4)
+		{
+				ofstream fout("EC.bin",ios::binary|ios::app);
+				fout.write((char*)&ecs,sizeof(&ecs));
+				fout.close();
+		}
+		else if(n==5)
+		{
+				ofstream fout("B_M_S.bin",ios::binary|ios::app);
+				fout.write((char*)&bmss,sizeof(&bmss));
+				fout.close();
+		}
+		else if(n==6)
+		{
+				ofstream fout("ENGLISH.bin",ios::binary|ios::app);
+				fout.write((char*)&e,sizeof(&e));
+				fout.close();
+		}
+		else if(n==7)
+		{
+				ofstream fout("COMP_PRAC.bin",ios::binary|ios::app);
+				fout.write((char*)&cp,sizeof(&cp));
+		        fout.close();
+		}
+		else if(n==8)
+		{
+				ofstream fout("EC_PRAC.bin",ios::binary|ios::app);
+				fout.write((char*)&ecp,sizeof(&ecp));
+				fout.close();
+		}
+		else if(n==9)
+		{
+				ofstream fout("WORKSHOP.bin",ios::binary|ios::app);
+				fout.write((char*)&wrks,sizeof(&wrks));
+				fout.close();
+		}
+		else if(n==10)
+		{
+				ofstream fout("PRACTICALS.bin",ios::binary|ios::app);
+				fout.write((char*)&pracs,sizeof(&pracs));
+				fout.close();
+		}		
+	}
+	void enter_data()
+	{
+		char inp;
+		if(math==true)
+		{
+			read_file(1);
+			cout<<"enter math :";
+			cin>>inp;
+			m.write_class(1,inp);
+			write_file(1);
+		}
+		if(comp==true)
+		{
+			read_file(2);
+			cout<<"enter comp:";
+			cin>>inp;
+			c.write_class(2,inp);
+			write_file(2);
+		}
+		if(et == true)
+		{
+			read_file(3);
+			cout<<"enter et:";
+			cin>>inp;
+			ets.write_class(3,inp);
+			write_file(3);
+		}
+		if(ec==true)
+		{
+			read_file(4);
+			cout<<"enter ec:";
+			cin>>inp;
+			ecs.write_class(4,inp);
+			write_file(4);
+		}
+		if(bms==true)
+		{
+			read_file(5);
+			cout<<"enter bms:";
+			cin>>inp;
+			bmss.write_class(5,inp);
+			write_file(5);
+		}
+		if(english==true)
+		{
+			read_file(6);
+			cout<<"enter english :";
+			cin>>inp;
+			e.write_class(6,inp);
+			write_file(6);
+		}
+		if(comp_p==true)
+		{
+			read_file(7);
+			cout<<"enter  comp prac:";
+			cin>>inp;
+			cp.write_class(7,inp);
+			write_file(7);
+		}
+		if(ec_p==true)
+		{
+			read_file(8);
+			cout<<"enter ec prac:";
+			cin>>inp;
+			ecp.write_class(8,inp);
+			write_file(8);
+		}
+		if(wrk==true)
+		{
+			read_file(9);
+			cout<<"enter workshop:";
+			cin>>inp;
+			wrks.write_class(9,inp);
+			write_file(9);
+		}
+		if(prac==true)
+		{
+			read_file(10);
+			cout<<"enter prac:";
+			cin>>inp;
+			pracs.write_class(10,inp);
+			write_file(10);
+		}
+	}
+
+	void enter_attn()
+	{
+		switch(get_node()->tm_wday)
+		{
+		case 1:monday();
+			   enter_data();
+			   break;
+		case 2:tuesday();
+			   enter_data();
+			   break;
+		case 3:wednesday();
+			   enter_data();
+			   break;
+		case 4:thursday();
+			   enter_data();
+			   break;
+		case 5:friday();
+			   enter_data();
+			   break;
+		default:cout<<"RELAX!! HOLIDAY TODAY.."<<endl;
+	    }
+	}
+
+	void view_attn()
+	{
+		system("cls");
+	 cout<<" press      subject"<<endl;
+	 cout<<"   1         MATH"<<endl;
+	 cout<<"   2         COMPUTER"<<endl;
+	 cout<<"   3         ET"<<endl;
+	 cout<<"   4         EC"<<endl;
+	 cout<<"   5         BMS"<<endl;
+	 cout<<"   6         ENGLISH"<<endl;
+	 cout<<"   7         COMPUTER PRAC"<<endl;
+	 cout<<"   8         EC PRAC"<<endl;
+	 cout<<"   9         WORKSHOP"<<endl;
+	 cout<<"   10        PRACTICALS"<<endl;
+	 int ch2;
+	 cout<<"Enter Choice :";
+	 cin>>ch2;
+	 subject temp;
+	 if(ch2==1)
+	 {
+		 ifstream fin("math.bin",ios::binary);
+		 if(!fin)
+			 cout<<"file not found"<<endl;
+		    while(fin.read((char*)&temp,sizeof(&temp)))
+				temp.display();
+			fin.close();
+	 }
+	 else if(ch2==1)
+	 {
+		 ifstream fin("math.bin",ios::binary);
+		 if(!fin)
+			 cout<<"file not found"<<endl;
+		    while(fin.read((char*)&temp,sizeof(&temp)))
+				temp.display();
+			fin.close();
+	 }
+	 else if(ch2==2)
+	 {
+		 ifstream fin("comp.bin",ios::binary);
+		 if(!fin)
+			 cout<<"file not found"<<endl;
+		    while(fin.read((char*)&temp,sizeof(&temp)))
+				temp.display();
+			fin.close();
+	 }
+	 else if(ch2==3)
+	 {
+		 ifstream fin("ET.bin",ios::binary);
+		 if(!fin)
+			 cout<<"file not found"<<endl;
+		    while(fin.read((char*)&temp,sizeof(&temp)))
+				temp.display();
+			fin.close();
+	 }
+	 else if(ch2==4)
+	 {
+		 ifstream fin("EC.bin",ios::binary);
+		 if(!fin)
+			 cout<<"file not found"<<endl;
+		    while(fin.read((char*)&temp,sizeof(&temp)))
+				temp.display();
+			fin.close();
+	 }
+	 else if(ch2==5)
+	 {
+		 ifstream fin("B_M_S.bin",ios::binary);
+		 if(!fin)
+			 cout<<"file not found"<<endl;
+		    while(fin.read((char*)&temp,sizeof(&temp)))
+				temp.display();
+			fin.close();
+	 }
+	 else if(ch2==6)
+	 {
+		 ifstream fin("ENGLISH.bin",ios::binary);
+		 if(!fin)
+			 cout<<"file not found"<<endl;
+		    while(fin.read((char*)&temp,sizeof(&temp)))
+				temp.display();
+			fin.close();
+	 }
+	 else if(ch2==7)
+	 {
+		 ifstream fin("COMP_PRAC.bin",ios::binary);
+		 if(!fin)
+			 cout<<"file not found"<<endl;
+		    while(fin.read((char*)&temp,sizeof(&temp)))
+				temp.display();
+			fin.close();
+	 }
+	 else if(ch2==8)
+	 {
+		 ifstream fin("EC_PRAC.bin",ios::binary);
+		 if(!fin)
+			 cout<<"file not found"<<endl;
+		    while(fin.read((char*)&temp,sizeof(&temp)))
+				temp.display();
+			fin.close();
+	 }
+	 else if(ch2==9)
+	 {
+		 ifstream fin("WORKSHOP.bin",ios::binary);
+		 if(!fin)
+			 cout<<"file not found"<<endl;
+		    while(fin.read((char*)&temp,sizeof(&temp)))
+				temp.display();
+			fin.close();
+	 }
+	 else if(ch2==10)
+	 {
+		 ifstream fin("PRACTICALS.bin",ios::binary);
+		 if(!fin)
+			 cout<<"file not found"<<endl;
+		    while(fin.read((char*)&temp,sizeof(&temp)))
+				temp.display();
+			fin.close();
+	 }
+	}
+
+	int main()
+	{
+		
+		while(1)
+		{
+			int flag=0;
+			system("cls");
+			cout<<"       ATTENDANCE REGISTER"<<endl<<endl;
+			cout<<"______________ MENU ______________"<<endl;
+		cout<<" PRESS                  FUNCTION"<<endl;
+		cout<<"__________________________________"<<endl;
+		cout<<"   1                  ENTER"<<endl;
+		cout<<"   2                  VIEW "<<endl;
+		cout<<"   3                  MODIFY"<<endl;
+		cout<<"   4                  ENTER DATEWISE"<<endl;
+		cout<<"   5                  CALC. PERC"<<endl;
+		int ch1;
+		cout<<"Enter choice :";
+		cin>>ch1;
+		switch(ch1)
+		{
+		case 1:enter_attn();
+				break;
+		case 2:view_attn();
+			   break;
+		}
+		cout<<"Do you wish to Re-Start ?(Y/N)..";
+		char ch3;
+		cin>>ch3;
+		if(ch3=='n'||ch3=='N')
+			break;
+		}
+	}

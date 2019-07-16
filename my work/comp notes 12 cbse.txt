@@ -1,0 +1,805 @@
+//COMPUTER NOTES 
+//these notes are for your help if youre refering to it no problem 
+//but please dont rely only on this file.
+//THIS IS JUST FOR YOUR UNDERSTANDING......
+//these notes only contain stuff from c++::
+//<just c++><from classes and objects till dynamic allocation>
+
+some important valer files and its functions:
+valer file 		functions
+iostream.h		cout,cin,cerr
+stdio.h 		gets(),puts()
+ctype.h                 toupper(),tolower(),isalnum(),isaplha(),isdigit()
+			isupper(),islower()
+string.h		strcmpi(),strcpy(),strcat(),strlen()
+stdlib.h		random(),randomize()
+iomanip.h		setw()
+math.h			pow(),sqrt()
+conio.h                 clrscr()
+
+
+definitons:
+	CLASS:
+	-A class is a user defined datatype that binds both data members
+	and member functions togeather under a single entity.
+	By default all members have "PRIVATE" accessibility.
+	we can change the accessibility by using accesslevel specifiers:
+		public:
+		protected:
+	classes do NOT occupy any memory.
+	-An instance of a class that is the object is the one that 
+	 occupies memory.
+	OBJECT:
+	an object is the instance of a class that can store data and
+	occupies space and it has an interface through functions.
+	charecteristics:
+		identity:name of the function
+		properties:attributes if the function.
+		behaviour:what the function is capable of doing.
+
+	MEMBER FUNCTIONS:
+	-they are of three types:
+	1>mutator:
+	  these functions allow the change of data members.
+	2>manager:
+	  eg:constructors and destructors
+	  used to give initial values to the data members and 
+	  destroy the object at the end of its scope(after its use).
+	3>accessor:
+	  these functions are used to access the private data members 
+	  of the class only.they do not change any  values
+eg:
+   class student
+   {
+	int roll;
+	char name[20];
+   public:
+	student()    //constructor #managerfunction
+        {
+	  roll=0;
+	  strcpy(name," ");
+	}
+	~student()   //destructor #managerfunction
+	{
+	cout<<"object deleted \n";
+	}
+        int return_roll() //#accessorfunction
+	{
+	  return roll;
+	}
+	void change_roll(int newroll)///#mutatorfunction
+	{
+	 roll=newroll;
+	}
+        void change_name(char newname[]);//function definition
+   };
+//outline function
+void student::change_name(char n_name[])//the argument name may not be same
+{
+ strcpy(name,n_name);
+}
+   
+------------------end of example---------------------------
+
+The member functions can be defined out side the class or inside
+th class.
+-if they are defined inside the class the are called inline functions
+-if they are declared inside the class and defined out side the class 
+ they are called outline functions.
+Q>when can a function not be declared as inline?
+A. A function cannot be declared as inline when if it has:
+	1.a loop, a switch or a goto statment.
+	2.a reutrn statement and the function does not return any values.
+	3.a static variable.
+	4.if the function is recursive(calls itself).
+
+Actual and formal parameters:
+	ACTUAL PARAMETERS		FORMAL PARAMETERS
+1.parameters passed during  		1.parameters passed during function
+  function call/invocation		  definition are called formal 
+  are called actual parameters.		  parameters.
+
+eg:
+void Greater(int a,int b)//formal parameters
+{
+ if(a>b)
+  cout<<a;
+ else 
+  cout<<b;
+}
+void main()
+{
+  int n1=10,n2=12;
+Grater(n1,n2);//actual parameters
+}
+
+constructors:
+types:
+1.default:
+  a constructor that accepts no parameters is called default constructor.
+  classname()
+2.parameterized:
+  a constructor that accepts parameters is called parameterized constuctor.
+  classname(parameter1,parameter2)
+3.copy:
+  a constructor that is used to initialize the values of the object with 
+  another object of the same class is called a copy constructor.
+  classname(classname &objectofclass)#call by reference.
+
+
+
+Call by reference and call by value:
+	CALL BY VALUE		
+1.when the formal parameters are a copy of the actual parameters.
+2.any changes made are not reflected back to the actual parameters.
+3.syntax:void swap(int a,int b);
+eg:
+void swap(int a,int b)
+{
+int temp;
+temp=a;
+a=b;
+b=temp;
+}
+void main()
+{
+int x=5,y=1;
+swap(x,y);
+cout<<x<<","<<y<<endl;
+}
+
+output:
+5,1
+
+	CALL BY REFERENCE
+1.formal and actual parameters are pointing to the same memory location.
+2.if any changes are made to the formal parameters the same changes are
+   applied to the actual parameters.
+3.syntax:void swap(int &a,int &b);
+eg:
+void swap(int &a,int &b)
+{
+int temp;
+temp=a;
+a=b;
+b=temp;
+}
+void main()
+{
+int x=5,y=1;
+swap(x,y);
+cout<<x<<","<<y<<endl;
+}
+
+output:
+1,5
+
+Abstract class:
+- a class that can only serve as a base class and does not have any objects
+  of its own.
+Concrete class:
+-a class that can serve as a base class and also can have it own objects.
+
+
+------------------END OF DEFINITIONS------------------------
+#key points:
+ for 2D array(nXn):
+ i=rows
+ j=column
+ min=monir diagonal
+ maj=major diagonal
+ upper half of maj	 i>j
+ lower half of maj	 i<j
+ upper half of min	 i+j<=n/2
+ lower half of min	 i+j>=n
+ major diag.	  	 i=j
+ minor diag.	  	 i+j==n-1
+
+some important programs:
+*this is the basic idea;modify as needed.
+bubble sort:
+
+int temp;
+void Bubblesort(int a[],int n)
+{
+int i,j;
+  for(i=0;i<n;i++)
+  {
+    for(j=0;j<n-i-1;j++)
+    {
+     if(a[j]>a[j+1])
+     {
+      temp=a[j];
+      a[j]=a[j+1];
+      a[j+1=temp;
+     }
+    }
+  }
+}
+
+selection sort:
+void sel_sort(int n,int a[])
+{
+    int temp,minat,Min;
+    for(int i=0;i<n;i++)
+    {
+        Min=a[i];
+        minat=i;
+        for(int j=i;j<n;j++)
+        {
+            if(a[j]<Min)
+            {
+                minat=j;
+                Min=a[j];
+            }
+        }
+            temp=a[i];
+            a[i]=a[minat];
+            a[minat]=temp;
+    }
+}
+}
+
+Binary search://assume that the array is sorted
+
+void bin_search(int a[],int n,int x)
+{
+ int temp,mid,flag=0,pos=-1;
+ int upper=a[n-1],lower=a[0];
+ mid=(upper+lower)/2;
+ while(lower<upper)
+ {
+  if(x<a[mid])
+  {
+    upper=mid-1;
+  }
+  else if(x>a[mid])
+  {
+   lower=mid+1;
+  }
+  else
+  {
+   flag=1;
+   pos=mid;
+  }
+  mid=(upper+lower)/2;
+ }
+if(flag==1)
+ cout<<"element found at"<<mid<<endl;
+else
+ cout<<"element not found"<<endl;
+}
+
+
+printing in order of matrix:
+for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<m;j++)
+            {
+                if(condition)
+                cout<<a[i][j]<<" ";
+            }
+            cout<<endl;
+    }
+
+inserting into a sorted array(1D):
+void ins(int x,int a[],int &n)
+{
+ for(int i=n;a[i]>x;i--)
+ {
+  a[i-1]=a[i];
+ }
+ a[i]=x;
+ n++;
+}
+
+deleting from a sorted array(1D):
+void del(int x,int &n,int a[])
+{
+  int flag=0;
+  for(int i=0;i<n;i++)
+  {
+   if(a[i]>x)
+   {
+    flag=1;
+    a[i-1]=a[i];
+   }
+  }
+ if(flag==1)
+ {
+  cout<<"deleted"<<endl;
+  n--;
+ }
+ else 
+  cout<<"element not found"<<endl;
+}
+
+STACKS AND QUEUES:
+
+STACK:
+      -It is a type of arrangement in which the data entered last is
+       acted upon first.
+      -It follows a LIFO structure.<LAST IN FIRST OUT>
+      
+QUEUE:
+      -It is a type of arrange ment in which the data entered first 
+       is acted upon first.
+      -It follows a FIFO structure.<FIRST IN FIRST OUT>
+
+
+#modify accordingly as per requirements
+INSERTION,DELETION AND DISPLAY:
+IN STATIC STACKS:
+void Insert(int a[],int n,int val,int &top)
+{
+ if(top==n-1)
+ {
+  cout<<"stack overflow"<<endl;
+ }
+ else
+{
+ top++;
+ a[top]=val;
+}
+}
+
+void Delete(int &top)
+{
+ if(top==-1)
+ cout<<"stack underflow"<<endl;
+ else
+ {
+  top--;
+  cout<<"deleted"<<endl;
+ }
+}
+
+void disp(int a[],int &top)
+{
+if(top==-1)
+ cout<<"no element present"<<endl;
+else
+{
+ for(int i=top;i>=0;i--)
+  cout<<a[i]<<" ";
+  cout<<endl;
+}
+}
+
+void main()
+{
+ int ch1;
+ int Stack[20];
+ int top=-1;
+ int n,val;
+ char ch2;
+ cout<<"enter the size of stack =";
+ cin>>n;
+ do{
+ cout<<"     menu"<<endl;
+ cout<<"press 1 for insertion"<<endl;
+ cout<<"press 2 for deletion"<<endl;
+ cout<<"press 3 for display"<<endl;
+ cout<<"your choice=";
+ cin>>ch1;
+ switch(ch1)
+ {
+ case 1:cout<<"enter the value you wish to insert=";
+	cin>>val;
+	Insert(Stack,n,val,top);
+	break;
+ case 2:Delete(top);
+	break;
+ case 3:disp(Stack,top);
+	break;
+ default:cout<<"error";
+ 	 break;
+ }
+ cout<<"do you wish to continue(Y/N)?"<<endl;
+ cin>>ch2;
+ }while(ch2=='y' || ch2=='Y');
+}
+
+QUEUES:
+#modify as per need.
+INSERTION,DELETION AND DISPLAY:
+IN STATIC QUEUE:
+void Insert(int a[],int n,int &F,int &R,int val)
+{
+ if(F==-1 && R==-1)
+ {
+  F=0;
+  R=0;
+  a[R]=val;
+ }
+ else if(R==n-1)
+ {
+  cout<<"queue overflow"<<endl;
+ }
+ else
+ {
+  R++;
+  a[R]=val;
+ }
+}
+
+void Delete(int &R,int &F)
+{
+ if(F==-1 && R==-1)
+ {
+   cout<<"queue underflow"<<endl;
+ }
+ else if(F==R)
+ {
+   F=-1;
+   R=-1;
+   cout<<"deleted"<<endl;
+ }
+ else
+ {
+  F++;
+  cout<<"deleted"<<endl;
+ }
+}
+
+void display(int a[],int &R,int &F)
+{
+ if(F==-1)
+ cout<<"queue empty"<<endl;
+ else 
+ {
+   for(int i=R;i>=F;i--)
+   {
+    cout<<a[i]<<" ";
+   }
+   cout<<endl;
+ }
+}
+
+void main()
+{
+ int ch1;
+ int Queue[20];
+ int R=-1,F=-1;
+ int n,val;
+ char ch2;
+ cout<<"enter the size of Queue =";
+ cin>>n;
+ do{
+ cout<<"     menu"<<endl;
+ cout<<"press 1 for insertion"<<endl;
+ cout<<"press 2 for deletion"<<endl;
+ cout<<"press 3 for display"<<endl;
+ cout<<"your choice=";
+ cin>>ch1;
+ switch(ch1)
+ {
+ case 1:cout<<"enter the value you wish to insert=";
+	cin>>val;
+	Insert(Queue,n,F,R,val);
+	break;
+ case 2:Delete(R,F);
+	break;
+ case 3:display(Queue,R,F);
+	break;
+ default:cout<<"error";
+ 	 break;
+ }
+ cout<<"do you wish to continue(Y/N)?"<<endl;
+ cin>>ch2;
+ }while(ch2=='y' || ch2=='Y');
+}
+
+INSERTION,DELETION AND DISPLAY:
+IN CIRCULAR QUEUE:
+void Insert(int a[],int n,int &F,int &R,int val)
+{
+    if(F==-1 && R==-1)
+    {
+        F=0;
+        R=0;
+        a[R]=val;
+    }
+    else if((F==0 && R==n-1)||R==F-1)
+    {
+        cout<<"circular queue overflow"<<endl;
+    }
+    else
+    {
+        if(R==n-1)
+            R=0;
+        else
+            R++;
+        a[R]=val;
+    }
+}
+
+void Delete(int &F,int &R,int n)
+{
+    if(F==-1)
+    {
+        cout<<"circular queue underflow"<<endl;
+    }
+    else if(F==R)
+    {
+        F=-1;
+        R=-1;
+    }
+    else if((F==n-1)&&(R!=n-1))
+        F=0;
+    else
+        F++;
+}
+void Disp(int a[],int &F,int &R,int n)
+{
+    if(F==-1)
+        cout<<"no element"<<endl;
+    else if(F<=R)
+    {
+        for(int i=F;i<=R;i++)
+            cout<<a[i];
+    }
+    else //case if F>R
+    {
+        for(int i=F;i<n;i++)
+            cout<<a[i];
+        for(int j=0;j<=R;j++)
+            cout<<a[j];
+        
+    }
+}
+
+void main()
+{
+    int CircQ[10];
+    int n,val;
+    int F=-1,R=-1;
+    char ch2;
+    int ch1;
+ cout<<"enter the size of Queue =";
+ cin>>n;
+ do{
+ cout<<"     menu"<<endl;
+ cout<<"press 1 for insertion"<<endl;
+ cout<<"press 2 for deletion"<<endl;
+ cout<<"press 3 for display"<<endl;
+ cout<<"your choice=";
+ cin>>ch1;
+ switch(ch1)
+ {
+ case 1:cout<<"enter the value you wish to insert=";
+	cin>>val;
+	Insert(CircQ,n,F,R,val);
+	break;
+ case 2:Delete(F,R,n);
+	break;
+ case 3:Disp(CircQ,F,R,n);
+	break;
+ default:cout<<"error";
+ 	 break;
+ }
+ cout<<"do you wish to continue(Y/N)?"<<endl;
+ cin>>ch2;
+ }while(ch2=='y' || ch2=='Y');
+}
+
+DYNAMIC ALLOCATION OF MEMORY:(ASSIGNING MEMORY AS REQUIRED)
+:LINK LISTS
+:STACKS
+:QUEUES
+
+SELF REFERENTIAL STRUCTURES:
+A structure having a member element that refers to the structure itself is called
+self refential structure.
+
+struct emp
+{
+int eno;
+char name[20];
+emp *next;
+}
+
+LINK LIST:
+ a link list is dynamic linear structure having an additional pointer as its element
+that points to the structure of the same type.
+
+#IM NOT SURE IF WE HAVE LINKED STACKS FOR THE HALF YEARLY PORTION SO JUST USE AS
+ NEEDED AND DONT DO ANY EXTRA WORK.
+
+
+We can apply it in queues and stacks-
+
+STACK::
+
+
+struct node//self referential structure
+{
+ int roll;
+ node *next;//pointer
+};
+
+node *T=NULL;//top pointer 
+
+void Insert()//to insert values
+{
+ node *val;
+ val=new node;
+ cout<<"enter roll:";
+ cin>>val->roll;  //from here youre done accepting values
+    val->next=T; //here the next pointer of the new value youre entering points to the old top
+    T=val;       //assign new top
+}
+
+
+void Delete()
+{
+ node *val;
+ if(T==NULL)
+ {
+   cout<<"underflow"<<endl;
+ }
+ else
+ {
+  val=T;
+  cout<<"roll deleted="<<val->roll<<endl;
+  T=val->next;   //shift top to the previous element
+  delete(val);   //delete value
+ }
+}
+
+void display()
+{
+ if(T==NULL)
+  cout<<"underflow"<<endl;
+ else{
+  node *val;
+  val=T;      //val has to start somewhere...<let it be top>
+  while(1)
+  {
+   cout<<"roll = "<<val->roll<<endl;
+   val=val->next;//move only val and keep top as it is.
+   if(val==NULL) //for last element.
+   break;
+  }
+ }
+}
+void main()
+{
+ int val,ch1;
+ char ch2;
+ do{
+ cout<<"       menu"<<endl;
+ cout<<"1          insertion"<<endl;
+ cout<<"2          deletion"<<endl;
+ cout<<"3          display"<<endl;
+ cout<<"your choice=";
+ cin>>ch1;
+ switch(ch1)
+ {
+  case 1:Insert();
+	 break;
+  case 2:Delete();
+	 break;
+  case 3:display();
+         break;
+  default:cout<<"error";
+ }
+ cout<<"do you wish to continue?(Y/N):";
+ cin>>ch2;
+}while(ch2=='Y' || ch2=='y');
+}
+
+#================END OF LINKED STACKS==================#
+QUEUE::
+
+
+struct node
+{
+ int roll;
+ node * next;
+};
+
+node *F=NULL,*R=NULL;
+
+void Insert()
+{
+ node *val;
+ val=new node;
+ cout<<"enter roll = ";
+ cin>>val->roll;
+ if(F==NULL)
+ {
+  F=val;
+  R=val;
+ }
+ else
+ {
+  R->next=val;//addressing previous data
+  R=val;//New rear
+ }
+}
+
+void Delete() 
+{
+ node *val;
+ if(F==NULL)
+ {
+   cout<<"underflow"<<endl;
+ }
+ else if(F==R)//for last element
+ {
+  cout<<"roll deleted= "<<F->roll<<endl;
+  F=NULL;
+  R=NULL;
+ }
+ else
+ {
+  val=F;
+  cout<<"roll deleted="<<val->roll<<endl;
+  F=val->next;
+  delete(val);
+
+ }
+}
+
+void display()
+{
+  node *val;
+  val=F;//initialize at front
+ while(1)
+ {
+  cout<<"roll= "<<val->roll<<endl;
+  val=val->next;//work your way up till R
+  if(val==R)
+  {
+      cout<<"roll= "<<val->roll<<endl;
+      break;
+  }
+
+ }
+}
+
+void main()
+{
+ int val,ch1;
+ char ch2;
+ do{
+ cout<<"       menu"<<endl;
+ cout<<"1          insertion"<<endl;
+ cout<<"2          deletion"<<endl;
+ cout<<"3          display"<<endl;
+ cout<<"your choice=";
+ cin>>ch1;
+ switch(ch1)
+ {
+  case 1:Insert();
+	 break;
+  case 2:Delete();
+	 break;
+  case 3:display();
+         break;
+  default:cout<<"error";
+ }
+ cout<<"do you wish to continue?(Y/N):";
+ cin>>ch2;
+}while(ch2=='Y' || ch2=='y');
+}
+#================END OF LINKED QUEUES==================#
+
+NOTE: IN THE LINKED STACKS PROGRAMS I HAVE TAKEN THE MAIN POINTERS AS GLOBAL
+      BUT YOU CAN TAKE THEM AS PARAMETERS ALSO, JUST REMEBER THAT YOU HAVE THEN INITIALIZE 
+      THEM IN void main().
+
+########################################################
+tttttttt  h    h  eeeeeee 	eeeeeee  n    n  ddd     
+   t      h    h  e       	e        nn   n  d   d
+   t      hhhhhh  eee       -   eee      n  n n  d    d
+   t      h    h  e       	e        n   nn  d   d 
+   t      h    h  eeeeeee 	eeeeeee  n    n  ddd
+########################################################
+
+ AND BEST OF LUCK PEOPLE!!
+HOPE MY NOTES HELPED! :)
+
+ 
+

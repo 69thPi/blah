@@ -1,0 +1,26 @@
+
+C:\Users\Tanmay_2\Desktop>g++ cfd.cpp -o a
+
+=====MARK 1======
+enter the grid height=1
+enter the grid width=1
+enter number of Y divisions(<100):5
+enter number of X divisions(<100):5
+-----------For DIRECHLET conditions-----------
+Enter North boundary Temp::0
+Enter South boundary Temp::0
+Enter East boundary Temp::0
+Enter West boundary Temp::100
+============================
+-0      -0      -0      -0      -0
+0       0.136719        0.195312        -0.172119       0
+-1.25   -0.546875       -0.917969       0.493164        -2.27254
+5       3.4375  4.21875 -1.05469        8.59701
+-25     -18.75  -20.3125        0       -33.3333
+============================
+-0      -0      -0      -0      -0
+0       -0.00634766     0.408325        -0.570658       0
+-0.597656       -0.169922       -1.45483        1.87431 -2.9188
+2.9375  2.05859 5.30078 -3.59774        9.8009
+-20.3125        -14.8438        -21.2891        0       -33.3333
+

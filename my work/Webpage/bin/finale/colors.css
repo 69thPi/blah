@@ -1,0 +1,141 @@
+html{
+	scroll-behavior:smooth;
+	color:black; /* text color for entire page*/
+}
+
+body{
+	background-color: black; /*background color for entire page*/
+	margin: 0px; /*leave no spaces along borders*/
+}
+
+div.pages{  /*the main page*/
+	border:1px solid white;
+	height: 48.11vw;
+	background-size: cover;
+	position: relative;
+	opacity: 0.8;
+}
+
+#home img{
+	position:absolute;
+	bottom:0%;
+	width:100%;
+}
+
+#home p{
+	position: absolute;
+}
+
+div.container{
+	color:black;
+	font-size: 500%;
+	width:99.7%;
+	height: 35%;
+	position: absolute;
+	bottom:0%;
+	overflow-y:auto;
+}
+
+a.nav{
+	background-color:rgb(50,80,100);
+	padding:1.1vw 3vw;
+	text-align:center;
+	text-decoration:none;
+	color:white;
+	font-family: 'Kalam', cursive; /*"Comic Sans MS", cursive, sans-serif;*/
+	outline: 0.3vw dashed rgb(250, 95, 106);
+	outline-offset: -0.3vw;
+	margin:0vw 1.5vw 0vw 1.5vw;
+}
+
+#NavBar{
+	background-color:rgba(0, 0, 0,0.2);
+	text-align:center;
+	padding:2vw;
+	position:sticky;
+	top:0;
+	z-index: 2;
+	border-radius: 0px 0px 50px 50px;
+}
+
+#author{ 													/*image of author*/
+	position:absolute;
+	top:20%;
+	left:55%;
+	height:45%;
+	width:25%;
+	transform: rotate(90deg);
+	border: 2px solid red;
+}
+
+div.text{
+	height:75%;
+	position:absolute;
+	top:15%;
+	left:5%;
+	width:40.7%;
+	word-wrap:break-word;
+	text-align: justify;
+	font-size: 110%;
+	font-family: 'Roboto Slab', serif;
+	overflow-y: auto;
+}
+
+p.title{
+		position:absolute;
+		top:-6.0%;  /*default*/
+		left:0.1%;  /*default*/
+		width:100%;  /*default*/
+		font-family: 'Averia Sans Libre', cursive;
+		font-size: 182%;
+		text-align:center;
+}
+
+.slide{
+			position:absolute;
+			top:10%;
+			left:12%;
+			width:80%;
+			height:88%;
+			display: none;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 3.5px;
+  background-color: #bbb;
+  border-radius: 50%;
+	display:inline-block;
+  transition: background-color 0.6s ease;
+	border:2px solid black;
+}
+
+.active, .dot:hover {
+  background-color: #000;
+}

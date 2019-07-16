@@ -1,0 +1,172 @@
+/*
+ * rand_test.c
+ *
+ * Created: 5/6/2018 5:54:44 PM
+ * Author : Tanmay
+ */ 
+
+// #include <util/delay.h>
+// #define F_CPU 1000000UL
+// #include "lcd_lib.h"
+// 
+// int main(void)
+// {
+// 	lcd_init();
+// 	//goto_loc(1,1);
+// 	//string("hey you!");
+// }
+// 
+/*
+ * rand_test.c
+ *
+ * Created: 5/6/2018 5:54:44 PM
+ * Author : Tanmay
+ */ 
+
+//#include <util/delay.h>
+//#define F_CPU 1000000UL
+// #include "lcd_lib.h"
+// 
+// int main(void)
+// {
+// 	lcd_init();
+// 	string("hey you!");
+// }
+// 
+
+#define F_CPU 1000000UL
+#include <util/delay.h>
+#include <avr/io.h>
+#include <stdlib.h>
+
+#define rs PINB0
+#define rw PINB1
+#define e PINB2
+#define data_d DDRD       //data direction register
+#define data_p PORTD      //store values
+#define control_p PORTB
+#define control_d DDRB
+
+void flash(void);
+void busy(void);
+void cmd(uint8_t);
+void send_char(unsigned char);
+void string(char *);
+void Num (int);
+void dec_Num (double);
+void lcd_init(void);
+void goto_loc(int,int);
+
+void flash(void)//trigger send //toggle enable
+{
+	control_p |=1<<e;
+	asm volatile ("nop");
+	asm volatile ("nop");
+	//_delay_ms(2);
+	control_p &=~(1<<e);
+}
+
+void busy(void)//check status register
+{
+	//if busy; toggle enable
+	//set to read mode
+	data_d =0;
+	control_p &= ~(1<<rs);
+	control_p |=  (1<<rw);
+	//compare data
+	//anti_flash
+	//if busy then flash till busy
+	while(data_p >= 0x80)
+	{
+		flash();
+	}
+	//set to write mode
+	data_d=0xFF;
+}
+
+void cmd(uint8_t a)//uint8_t
+{
+	busy();
+	data_p = a;
+	control_p &= ~(1<<rs);//set to write and cmd mode
+	control_p &= ~(1<<rw);
+	flash();
+	data_p = 0x00;
+}
+int len=0;
+void send_char(unsigned char b)
+{
+	busy();
+	control_p |= (1<<rs);//set to data mode
+	control_p &= ~(1<<rw);//set to write
+	data_p = b;
+	flash();
+	data_p = 0;
+	_delay_us(800);
+}
+void string(char *s)
+{
+	len=0;
+	while(*s > 0)
+	{
+		send_char(*s++);
+		len++;
+		if(len == 16)
+		{
+			cmd(0xC0);
+			len=0;
+			s--;
+		}
+	}
+}
+void Num (int value)
+{
+	char number[100];
+	itoa(value,number,10);
+	string(number);//displaying number
+}
+
+void dec_Num (double j)
+{
+	char number[100];
+	dtostrf(j,8,2, number);
+	string(number);
+}
+
+void goto_loc(int x,int y)
+{
+	if(y==2)
+	{
+		cmd(0x80 + 64 + x - 1);
+		_delay_us(4500);
+	}
+	else if(y==1)
+	{
+		cmd(0x80 + x -1);
+		_delay_us(4500);
+	}
+}
+
+void lcd_init(void)
+{
+	control_d |= (1<<e) |(1<<rs)|(1<<rw);//PORTB set as output
+	//data_d = 1;//PORTD set as output works without as first busy() is called
+	////initialsation instruction
+	_delay_ms(15);
+	cmd(0x38);//8bit -2 line mode
+	_delay_us(4500);
+	cmd(0x38);//8bit-2 line
+	_delay_us(4500);
+	cmd(0x38);//8bit -2 line
+	_delay_us(150);
+	cmd(0x01);//cls & cursor 0,0
+	_delay_ms(2);
+	cmd(0x0C);//display + cursor on +LCD blink off
+	_delay_ms(2);
+}
+
+int main(void)
+{
+	lcd_init();
+	string("hey you!");
+}

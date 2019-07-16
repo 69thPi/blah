@@ -1,0 +1,17 @@
+enter the grid height=1
+enter the grid width=1
+enter number of Y divisions(<100):5
+enter number of X divisions(<100):5
+-----------For DIRECHLET conditions-----------
+Enter North boundary Temp::0
+Enter South boundary Temp::0
+Enter East boundary Temp::0
+Enter West boundary Temp::1
+0.468687        0.245522        0.134615        0.0717851       0.0313131
+
+0.629225        0.378788        0.221154        0.121212        0.0534673
+
+0.669425        0.41925 0.25    0.138442        0.0613441
+0.629225        0.378788        0.221154        0.121212        0.0534673
+
+0.468687        0.245522        0.134615        0.0717851       0.0313131

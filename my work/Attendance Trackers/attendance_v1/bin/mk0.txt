@@ -1,0 +1,187 @@
+#include <iostream>
+#include<ctime>
+#include<time.h>
+#include <stdio.h>
+#include<string.h>
+
+using namespace std;
+
+class day
+{
+    char *sub1;
+    char *sub2;
+    char *sub3;
+    char *sub4;
+    char *prac1;
+    char *prac2;
+public:
+    day()
+    {
+        strcpy(sub1," ");
+        strcpy(sub2," ");
+        strcpy(sub3," ");
+        strcpy(sub4," ");
+        strcpy(prac1," ");
+        strcpy(prac2," ");
+    }
+    void enter_data(int);
+    void copy_data(int p,int t /*date of absentee*/); ///used to copy data of sub to subject
+};
+class subject:public day
+{
+    int present;         ///present days
+    int total;           ///total classes
+    struct tm *date;     ///to write date of absentee
+public:
+    void writefile();    ///to save data
+};
+
+
+void day::enter_data(int n)
+{
+	char s1=' ';
+	char s2=' ';
+	char s3=' ';
+	char s4=' ';
+	char p1=' ';
+	char p2=' ';
+	cout<<"P= present A=absent B=mass bunk";
+    switch(n)
+	{
+	case 1: strcpy(sub1,"MATHS");						//monday
+		    strcpy(sub2,"COMPUTER");
+			strcpy(sub3,"E C");
+			strcpy(sub4,"E T");
+			cout<<"  "<<sub1<<" : ";
+			cin>>s1;
+			cout<<"  "<<sub2<<" : ";
+			cin>>s2;
+			cout<<"  "<<sub3<<" : ";
+			cin>>s3;
+			cout<<"  "<<sub4<<" : ";
+			cin>>s4;
+			break;
+	case 2: strcpy(sub1,"MATHS");						//tuesday
+		    strcpy(sub2,"E T");
+			strcpy(sub3,"B M C");
+			strcpy(sub4,"COMPUTER");
+			strcpy(prac1,"COMP prac");
+			strcpy(prac2,"E C prac");
+			cout<<"  "<<sub1<<" : ";
+			cin>>s1;
+			cout<<"  "<<sub2<<" : ";
+			cin>>s2;
+			cout<<"  "<<sub3<<" : ";
+			cin>>s3;
+			cout<<"  "<<sub4<<" : ";
+			cin>>s4;
+			cout<<"  "<<prac1<<" : ";
+			cin>>p1;
+			cout<<"  "<<prac2<<" : ";
+			cin>>p2;
+			break;
+	case 3: strcpy(sub1,"ENGLISH");						//wednesday
+		    strcpy(sub2,"B M S");
+			strcpy(sub3,"E T");
+			strcpy(sub4,"E C");
+			cout<<"  "<<sub1<<" : ";
+			cin>>s1;
+			cout<<"  "<<sub2<<" : ";
+			cin>>s2;
+			cout<<"  "<<sub3<<" : ";
+			cin>>s3;
+			cout<<"  "<<sub4<<" : ";
+			cin>>s4;
+			break;
+	case 4: strcpy(sub1,"B M S");					//thursday
+		    strcpy(sub2,"MATH");
+			strcpy(sub3,"ENGLISH");
+			strcpy(prac1,"WORKSHOP");
+			cout<<"  "<<sub1<<" : ";
+			cin>>s1;
+			cout<<"  "<<sub2<<" : ";
+			cin>>s2;
+			cout<<"  "<<sub3<<" : ";
+			cin>>s3;
+			cout<<"  "<<prac1<<" : ";
+			cin>>p1;
+			break;
+	case 5: strcpy(sub1,"E T");						//friday
+		    strcpy(sub2,"E C");
+			strcpy(sub3,"COMPUTER");
+			strcpy(sub4,"MATHS");
+			strcpy(prac1," prac");
+			cout<<"  "<<sub1<<" : ";
+			cin>>s1;
+			cout<<"  "<<sub2<<" : ";
+			cin>>s2;
+			cout<<"  "<<sub3<<" : ";
+			cin>>s3;
+			cout<<"  "<<sub4<<" : ";
+			cin>>s4;
+			cout<<"  "<<prac1<<" : ";
+			cin>>p1;
+			break;
+	}
+	if(strcmpi(sub1,"MATH")||strcmpi(sub2,"MATH")||strcmpi(sub3,"MATH")||strcmpi(sub4,"MATH"))
+		   //write into math
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int get_day()
+{
+ struct tm *node;
+ time_t tim;
+ time(&tim);
+ node=localtime(&tim);
+ return node->tm_wday;
+}
+
+void enter_attendance()
+{
+	switch(get_day())
+ {
+    case 1: day monday;
+	        monday.enter_data();
+            break;
+    case 2:  day tuesday;
+	        tuesday.enter_data();
+            break;
+    case 3: day wednesday;
+	        wednesday.enter_data();
+            break;
+    case 4:  day thursday;
+	       thursday.enter_data();
+            break;
+    case 5:  day friday;
+	        friday.enter_data();
+            break;
+    default: "Chill!!mahn..holiday today!";
+ }  
+}
+
+
+
+int main()
+{
+	return 0;
+}

@@ -1,0 +1,71 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+
+using namespace std;
+
+char* encrypt()
+{
+  cout<<"enter the text:";
+  char pt[100]="abcdefgh";
+ //encryption process
+  return pt;
+}
+
+int main1()
+{
+ //first create a fn that encrypts the plaintext
+	char* str=(char*)malloc(sizeof(encrypt()));
+	str=encrypt();
+	cout<<str<<endl;
+	free(encrypt());
+	char *ptr=(char*)malloc(sizeof(encrypt()));
+	cout<<ptr<<endl;
+	cin>>ptr;
+ //write that encryption in a file.
+	//but manipulate the text before that
+}
+int main()
+{
+char* data = (char *)malloc(32); // Assuming that the 9th char is critical...
+
+    data[8] = 'L';
+
+    cout<<"data buffer at address"<<data<<endl;
+
+    /*  ...
+     *  some complex program code here
+     *  ...
+     */
+    free(data); //the data buffer could be accidentially freed.
+    /*  ...
+     *  some complex program code here
+     *  ...
+     */
+
+    /* Here, the allocator could allocate the chunk of data buffer for the input buffer.
+     * Whether this will happen depends on multiple factors (allocation algorithm,
+     * the size of the buffer, etc.). For example, if you set the input buffer with
+     * size 64, this might not happen because the allocator will use a new chunk
+     * instead of reusing the old one.
+     */
+    char* input = (char *)malloc(32);
+    cout<<"input buffer at address"<<input<<endl;
+
+    /* Assuming that the attacker can control the input. Now, the attacker can
+     * type aaaaaaaaS to write char 'S' to the critical space.
+     */
+    cin>>input;
+
+    /* The dangling pointer is used here to do a critical operation.
+     * Note that this bug might be hard to find because it will
+     * almost never trigger a crash.
+     */
+    if(data[8] == 'S'){
+        cout<<"Pwn!\n"; // This is the goal of the attacker
+    }else{
+        cout<<"Pew!\n";
+    }
+
+    return 0;
+}

@@ -1,0 +1,69 @@
+TWCR=(1<<TWINT)|(1<<TWEN);
+while(!(TWCR & (1<<TWINT)));
+return(TWDR);
+}
+
+void rtc_write(unsigned char data)
+{
+TWDR=data;// sending address
+TWCR=(1<<TWINT)|(1<<TWEN);
+while(TWCR & (1<<TWINT)==0);
+}
+
+void rtc_stop()
+{
+TWCR=(1<<TWINT)|(TWSTO)|(1<<TWEN);
+while(TWCR & (1<<TWINT)==0);
+
+}
+
+main()
+{
+unsigned char sec,min,hr;
+DDRA=0xFF;
+DDRB=0xFF;
+
+
+rtc_init();
+_delay_ms(1000);
+
+rtc_start();
+
+rtc_write(0b11010000);   // 1101000=adress of ds1307 and bit 0= write   
+rtc_write(0x00);  // pointing address location 00 i.e seconds
+rtc_write(0x00);// set sec=0
+rtc_write(0x00);// set min=0
+rtc_write(0x00);// set hr=0
+
+rtc_stop();
+
+
+while(1)
+{
+
+rtc_start();
+rtc_write(0b11010001);   // 1101000=adress of ds1307 and bit 1= read   
+rtc_write(0x00);  // pointing address location 00 i.e seconds
+sec=rtc_read();
+rtc_stop();
+PORTA=sec;
+PORTB=0x01;
+_delay_ms(5000);
+rtc_start();
+rtc_write(0b11010001);   // 1101000=adress of ds1307 and bit 1= read   
+rtc_write(0x01);  // pointing address location 00 i.e seconds
+min=rtc_read();
+rtc_stop();
+PORTA=min;
+PORTB=0x02;
+_delay_ms(5000);
+rtc_start();
+rtc_write(0b11010001);   // 1101000=adress of ds1307 and bit 1= read   
+
+hr=rtc_read();
+rtc_stop();
+PORTA=hr;
+PORTB=0b00000100;
+_delay_ms(5000);
+}
+}

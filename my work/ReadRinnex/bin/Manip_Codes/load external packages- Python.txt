@@ -1,0 +1,10 @@
+to download an external package from PyPI
+
+goto cmd and use the 'pip' command
+
+type::
+python -m pip install PackageName
+
+and to upgrade pip to the latest version::
+
+python -m pip install --upgrade pip

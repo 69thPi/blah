@@ -1,0 +1,168 @@
+class day
+{
+	char math;
+	char comp;
+	char et;
+	char ec;
+	char bms;
+	char english;
+	char comp_p;
+	char ec_p;
+	char wrk;
+	char prac;
+public:
+	day()
+	{
+		math='n';
+		comp='n';
+		et='n';
+		ec='n';
+		bms='n';
+		english='n';
+		comp_p='n';
+		ec_p='n';
+		wrk='n';
+		prac='n';
+	}
+	void cng_sub_st(int n)
+{
+		switch(n)
+	{
+	  case 1:math='y';
+			   break;
+	  case 2:comp='y';
+			   break;
+	  case 3:et='y';
+			   break;
+	  case 4:ec='y';
+			   break;
+	  case 5:bms='y';
+			   break;
+      case 6:english='y';
+			   break;
+	  case 7:comp_p='y';
+			   break;
+      case 8:ec_p='y';
+			   break;
+	  case 9:wrk='y';
+			   break;
+	  case 10:prac='y';
+			   break;
+	}
+}
+	void enter_data()
+	{
+		
+		day temp;
+		
+		switch(get_node()->tm_wday)
+		{
+		case 1://monday
+			   temp=mon;
+			   break;
+		case 2://tuesday
+			   temp=tue;
+			   break;
+		case 3://wednesday
+			   temp=wed;
+			   break;
+		case 4://thursday
+			   temp=thurs;
+			   break;
+		case 5://friday
+			   temp=fri;
+			   break;
+		}
+		char p[10];
+		if(temp.math=='y')
+		{
+			cout<<"enter for MATH:";
+			cin>>p[0];
+		}
+		if(temp.comp=='y')
+		{
+			cout<<"enter for COMP :";
+			cin>>p[1];
+		}
+		if(temp.et=='y')
+		{
+			cout<<"enter for ET:";
+			cin>>p[2];
+		}
+		if(temp.ec=='y')
+		{
+			cout<<"enter for EC:";
+			cin>>p[3];
+		}
+		if(temp.bms=='y')
+		{
+			cout<<"enter for B M S:";
+			cin>>p[4];
+		}
+		if(temp.english=='y')
+		{
+			cout<<"enter for ENGLISH:";
+			cin>>p[5];
+		}
+		if(temp.comp_p=='y')
+		{
+			cout<<"enter for COMP PRAC:";
+			cin>>p[6];
+		}
+		if(temp.ec_p=='y')
+		{
+			cout<<"enter for  EC PRAC:";
+			cin>>p[7];
+		};
+		if(temp.wrk=='y')
+		{
+			cout<<"enter for WORKSHOP:";
+			cin>>p[8];
+		}
+		if(temp.prac=='y')
+		{
+			cout<<"enter for  PRAC:";
+			cin>>p[9];
+		}
+		
+			
+	}
+	
+
+};
+/////////objects//////////////
+day mon,tue,wed,thurs,fri;
+
+void dec()
+{
+	mon.cng_sub_st(1);
+	mon.cng_sub_st(2);
+	mon.cng_sub_st(4);
+	mon.cng_sub_st(3);
+	tue.cng_sub_st(1);
+	tue.cng_sub_st(3);
+	tue.cng_sub_st(5);
+	tue.cng_sub_st(2);
+	tue.cng_sub_st(8);
+	tue.cng_sub_st(7);
+	wed.cng_sub_st(6);
+	wed.cng_sub_st(5);
+	wed.cng_sub_st(3);
+	wed.cng_sub_st(4);
+	thurs.cng_sub_st(5);
+	thurs.cng_sub_st(1);
+	thurs.cng_sub_st(6);
+	thurs.cng_sub_st(9);
+	fri.cng_sub_st(3);
+	fri.cng_sub_st(4);
+	fri.cng_sub_st(2);
+	fri.cng_sub_st(1);
+	fri.cng_sub_st(10);
+}
+
+
+
+void run()
+{
+	dec();
+}

@@ -1,0 +1,17 @@
+//to call interrupt at 1 second;
+int main()
+{
+	sei();//enabling interrupts
+        TCCR1X |=1<<CS10 |1<<CS11 |1<<WGM12;
+	TIMSK |=1<<OCIE1A;
+	OCR1A=   //value to compare with TCNT1; and if true call interrupt
+//for second wise prescaling=15624;
+	while(1)
+	{
+  	
+	}
+}
+ISR(TIMER1_COMPA_vect)//interrupt code//called when interrupt is enabled
+{
+   //executing code;
+}

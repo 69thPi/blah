@@ -1,0 +1,110 @@
+/*
+ * mark4
+ * INTERRUPT.c
+ *
+ * Created: 2/8/2016 4:28:00 PM
+ * Author : Tanmay
+ */ 
+
+#include<avr/io.h>
+#include<util/delay.h>
+#include<avr/interrupt.h>
+
+
+int val[6]={0,0,0,0,0,0};
+long int num=200090;
+
+
+///////////////////////////
+//select display for ULN2003A
+void display(int n)
+{
+	switch(n)
+	{
+		case 0:PORTD=0b11000000; break;
+		case 1:PORTD=0b11111001; break;
+		case 2:PORTD=0b10100100; break;
+		case 3:PORTD=0b10110000; break;
+		case 4:PORTD=0b10011001; break;
+		case 5:PORTD=0b10010010; break;
+		case 6:PORTD=0b10000010; break;
+		case 7:PORTD=0b11111000; break;
+		case 8:PORTD=0b10000000; break;
+		case 9:PORTD=0b10010000; break;
+	}
+}
+///////////////////////////
+//select port for non ULN2003A
+void display_sec(int n)
+{
+	switch(n)
+	{
+		case 0:PORTD=0b00111111; break;
+		case 1:PORTD=0b00000110; break;
+		case 2:PORTD=0b01011011; break;
+		case 3:PORTD=0b01001111; break;
+		case 4:PORTD=0b01100110; break;
+		case 5:PORTD=0b01101101; break;
+		case 6:PORTD=0b01111101; break;
+		case 7:PORTD=0b00000111; break;
+		case 8:PORTD=0b01111111; break;
+		case 9:PORTD=0b01101111; break;
+	}
+}
+//////////////////////////
+//fn gets values and organizes display
+void get_display() 
+{
+	for(int i=0;i<5;i++)
+	{
+		display(val[i]);//change for d flip flop
+		PORTB=0<<i;
+		_delay_ms(50);
+		PORTB=1<<i;
+	}
+	for(int i=5;i<7;i++)
+	{
+		display(val[i]);
+		PORTB=0<<i;
+		_delay_ms(50);
+		PORTB=1<<i;
+	}
+}
+/////////////////////////
+//count down function
+void counter()
+{
+	int i=5;
+	long int temp=num;
+	while(num>0)
+	{
+		val[i]=num%10;
+		num/=10;
+		i--;
+	}
+	temp--;
+	num=temp;
+}
+////////MAIN///////
+int main()
+{
+	sei();//enabling interrupts
+	TCCR1B |=1<<CS10 |1<<CS11 |1<<WGM12;
+	TIMSK |=1<<OCIE1A;
+	OCR1A=15624;
+	DDRD=0b11111111;//led multiplexing
+	DDRB=0b11111111;//cp
+	PORTD=0b00000000;//0-6 gives high
+	PORTB=0b11111111;
+	while(1)
+	{
+	}
+	
+}
+///////interrupt sequence//////
+ISR(TIMER1_COMPA_vect)
+{
+	counter();
+	//get_display();
+}
+

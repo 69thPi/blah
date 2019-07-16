@@ -1,0 +1,41 @@
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+using namespace std;
+
+void giv_val()
+{
+ char * one= (char*)malloc(128);//16 alphas
+ strncpy_s(one,64,"abcdefghijklmnop",16);
+ cout<<"Value     Mem Loc"<<endl;
+ cout<<"----------------------------"<<endl;
+ cout<<" One  \t  "<<(int*)&one[0]<<endl;
+ cout<<"----------------------------"<<endl;
+ for(int i=0;i<16;i++)// printing only 16 for convenience
+	{ 
+		cout<<"  "<<one[i]<<"  \t  "<<(int*)&one[i]<<endl;
+    }
+ free(one);
+}
+
+int main()
+{
+	giv_val();
+
+		
+	char * two = (char*)malloc(128);//pointing to same loc as 'one' mostly.
+	cout<<"----------------------------"<<endl;
+	cout<<" Two  \t  "<<(int*)&two[0]<<endl;
+	cout<<"----------------------------"<<endl;
+		char msg[]="URHACKED";//chosen cipher text
+		char *copy_ig= &two[6];//chosen position in cyphertext
+		strncpy_s(copy_ig,128,msg,8);
+		for(int i=0;i<16;i++)
+		{ 
+			cout<<"  "<<two[i]<<"  \t  "<<(int*)&two[i]<<endl;
+		}
+	system("pause");
+	return 0;
+}

@@ -1,0 +1,61 @@
+#include <avr/io.h >
+#include <avr/interrupt.h >
+#define F_CPU 8000000UL
+#include <util/delay.h>
+#include <string.h>
+
+char *current;
+char *previous;
+char *str;
+int i=0;
+unsigned char x=0;
+//when not using interrupt call this funtion
+void UART_Rx_Str()
+{
+	char x;
+	x=USART_Recieve();
+	if(int(x)!= 13) //13= null
+	{
+		str[i++] = x;
+		UART_Rx_Str();
+	}
+	str[i] = '\0';
+}
+
+void rfid_comparestring(void)
+{
+	if(strcmp(previous,current)!=0)//if not same
+	{
+		USART_TransmitString(current);
+		strcpy(previous,current);
+	}
+}
+
+
+int main()
+{
+	USART_InterruptEnable(); //USART funciton in <UART mode>
+	sei();
+	USART_Init(51);
+		//when interrupt is called the data is read
+	while(1)
+	{
+		
+	}
+	
+}
+
+ISR (USART0_RX_vect)
+{
+	char x ;
+	int i=0;
+	x=USART_Recieve();
+	while(i<12)
+	{
+		current[i++] = x;
+	}
+	
+	current[i] = '\0';
+	rfid_comparestring();
+	
+}

@@ -1,0 +1,726 @@
+#include <iostream>
+#include <fstream>
+#include <ctime>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+using namespace std;
+
+tm* get_day()
+{
+	 struct tm *node;
+	 time_t tim;
+	 time(&tim);
+	 node=localtime(&tim);
+	 return node;
+}
+void strcpy(char *a,char* b)
+{
+	for(int i=0;b[i]!='/0';i++)
+	a[i]=b[i];
+}
+int compare(char* a,char*b)
+{
+	int flag=1;//true
+	if(strlen(a)==strlen(b))
+	{
+	for(int i=0;a[i]!='/0';i++)
+	{
+		if(a[i]!=b[i])
+			flag=0;
+	}
+	}
+	else
+	{
+		flag=0;
+	}
+	return flag;
+}
+
+class subject
+{
+    int present;         ///present days
+    int total;			 ///total classes
+	int day;
+	int month;
+	int year;
+	char *bunk;
+
+public:
+	subject()
+	{
+		present=0;
+		total=0;
+		day=0,month=0,year=0;
+		strcpy(bunk,"no");
+	}
+    void writefile_math(char,subject o);    ///to save data
+	void writefile_comp(char,subject o);
+	void writefile_et(char,subject o);
+	void writefile_ec(char,subject o);
+	void writefile_english(char,subject o);
+	void writefile_bms(char,subject o);
+	void writefile_cp(char,subject o);
+	void writefile_ecp(char,subject o);
+	void writefile_workshop(char,subject o);
+	void writefile_prac(char,subject o);
+	void show_math();
+	void show_comp();
+	void show_et();
+	void show_ec();
+	void show_eng();
+	void show_bms();
+	void show_cp();
+	void show_ecp();
+	void show_wrkshp();
+	void show_prac();
+};
+
+class day:public subject
+{
+    char *sub1;
+    char *sub2;
+    char *sub3;
+    char *sub4;
+	char *sub5;
+    char *sub6;
+    char *prac1;
+    char *prac2;
+    char *prac3;
+    char *prac4;
+public:
+    day()
+    {
+        strcpy(sub1,"MATH");
+        strcpy(sub2,"COMPUTER");
+        strcpy(sub3,"E T");
+        strcpy(sub4,"E C");
+		strcpy(sub5,"ENGLISH");
+        strcpy(sub6,"B M S");
+        strcpy(prac1,"COMP prac");
+        strcpy(prac2,"EC prac ");
+		strcpy(prac3,"WORKSHOP");
+        strcpy(prac4,"PRACTICALS");
+    }
+    void enter_data(int);
+};
+
+/// /////////////objects of subject/////////////////
+subject prc,wrkshp,ecp,cp,bms,eng,ec,et,comp,math;
+day monday,tuesday,wednesday,thursday,friday;
+/// //////////////////////////////
+void subject::writefile_math(char a,subject dummy)
+{
+	ofstream fout("attnsheetmath.bin",ios::binary|ios::app);
+	if(a=='P')
+	{
+		dummy.present++;
+		dummy.total++;
+	}
+	else if(a=='A' || a=='B')
+	{
+		dummy.total++;
+		dummy.day=get_day()->tm_mday;
+		dummy.month=get_day()->tm_mon+1;
+		dummy.year=get_day()->tm_year+1900;
+		if(a=='B')
+			strcpy(dummy.bunk,"yes");
+	}
+	fout.write((char*)&dummy,sizeof(dummy));
+	fout.close();
+}
+void subject::show_math()
+{
+	subject bub;
+	ifstream fin("attnsheetmath.bin",ios::binary);
+	while(fin.read((char*)&bub,sizeof(bub)))
+	{
+		cout<<"days Present: "<<bub.present<<" / "<<bub.total<<endl;
+		cout<<bub.day<<"-"<<bub.month<<"-"<<bub.year<<endl;
+		if(compare(bub.bunk,"yes")==1)
+		{
+			cout<<"bunked:yes"<<endl;
+		}
+		if(bub.day!=0)
+		{
+			cout<<"absent:yes"<<endl;
+		}
+	}
+	fin.close();
+}
+///sub1
+void subject::writefile_comp(char a,subject dummy)
+{
+	ofstream fout("attnsheetcomp.bin",ios::binary|ios::app);
+	if(a=='P')
+	{
+		dummy.present++;
+		dummy.total++;
+	}
+	else if(a=='A' || a=='B')
+	{
+		dummy.total++;
+		dummy.day=get_day()->tm_mday;
+		dummy.month=get_day()->tm_mon+1;
+		dummy.year=get_day()->tm_year+1900;
+		if(a=='B')
+			strcpy(dummy.bunk,"yes");
+	}
+	fout.write((char*)&dummy,sizeof(dummy));
+	fout.close();
+}
+void subject::show_comp()
+{
+	subject bub;
+	ifstream fin("attnsheetcomp.bin",ios::binary);
+	while(fin.read((char*)&bub,sizeof(bub)))
+	{
+		cout<<"days Present: "<<bub.present<<" / "<<bub.total<<endl;
+		cout<<bub.day<<"-"<<bub.month<<"-"<<bub.year<<endl;
+		if(compare(bub.bunk,"yes")==1)
+		{
+			cout<<"bunked:yes"<<endl;
+		}
+		if(bub.day!=0)
+		{
+			cout<<"absent:yes"<<endl;
+		}
+	}
+	fin.close();
+}
+///sub2
+void subject::writefile_et(char a,subject dummy)
+{
+	ofstream fout("attnsheetet.bin",ios::binary|ios::app);
+	if(a=='P')
+	{
+		dummy.present++;
+		dummy.total++;
+	}
+	else if(a=='A' || a=='B')
+	{
+		dummy.total++;
+		dummy.day=get_day()->tm_mday;
+		dummy.month=get_day()->tm_mon+1;
+		dummy.year=get_day()->tm_year+1900;
+		if(a=='B')
+			strcpy(dummy.bunk,"yes");
+	}
+	fout.write((char*)&dummy,sizeof(dummy));
+	fout.close();
+}
+void subject::show_et()
+{
+	subject bub;
+	ifstream fin("attnsheetmath.bin",ios::binary);
+	while(fin.read((char*)&bub,sizeof(bub)))
+	{
+		cout<<"days Present: "<<bub.present<<" / "<<bub.total<<endl;
+		cout<<bub.day<<"-"<<bub.month<<"-"<<bub.year<<endl;
+		if(compare(bub.bunk,"yes")==1)
+		{
+			cout<<"bunked:yes"<<endl;
+		}
+		if(bub.day!=0)
+		{
+			cout<<"absent:yes"<<endl;
+		}
+	}
+	fin.close();
+}
+///sub3
+void subject::writefile_ec(char a,subject dummy)
+{
+	ofstream fout("attnsheetec.bin",ios::binary|ios::app);
+	if(a=='P')
+	{
+		dummy.present++;
+		dummy.total++;
+	}
+	else if(a=='A' || a=='B')
+	{
+		dummy.total++;
+		dummy.day=get_day()->tm_mday;
+		dummy.month=get_day()->tm_mon+1;
+		dummy.year=get_day()->tm_year+1900;
+		if(a=='B')
+			strcpy(dummy.bunk,"yes");
+	}
+	fout.write((char*)&dummy,sizeof(dummy));
+	fout.close();
+}
+void subject::show_ec()
+{
+	subject bub;
+	ifstream fin("attnsheetec.bin",ios::binary);
+	while(fin.read((char*)&bub,sizeof(bub)))
+	{
+		cout<<"days Present: "<<bub.present<<" / "<<bub.total<<endl;
+		cout<<bub.day<<"-"<<bub.month<<"-"<<bub.year<<endl;
+		if(compare(bub.bunk,"yes")==1)
+		{
+			cout<<"bunked:yes"<<endl;
+		}
+		if(bub.day!=0)
+		{
+			cout<<"absent:yes"<<endl;
+		}
+	}
+	fin.close();
+}
+///sub4
+void subject::writefile_english(char a,subject dummy)
+{
+	ofstream fout("attnsheetenglish.bin",ios::binary|ios::app);
+	if(a=='P')
+	{
+		dummy.present++;
+		dummy.total++;
+	}
+	else if(a=='A' || a=='B')
+	{
+		dummy.total++;
+		dummy.day=get_day()->tm_mday;
+		dummy.month=get_day()->tm_mon+1;
+		dummy.year=get_day()->tm_year+1900;
+		if(a=='B')
+			strcpy(dummy.bunk,"yes");
+	}
+	fout.write((char*)&dummy,sizeof(dummy));
+	fout.close();
+}
+void subject::show_eng()
+{
+	subject bub;
+	ifstream fin("attnsheetenglish.bin",ios::binary);
+	while(fin.read((char*)&bub,sizeof(bub)))
+	{
+		cout<<"days Present: "<<bub.present<<" / "<<bub.total<<endl;
+		cout<<bub.day<<"-"<<bub.month<<"-"<<bub.year<<endl;
+		if(compare(bub.bunk,"yes")==1)
+		{
+			cout<<"bunked:yes"<<endl;
+		}
+		if(bub.day!=0)
+		{
+			cout<<"absent:yes"<<endl;
+		}
+	}
+	fin.close();
+}
+///sub5
+void subject::writefile_bms(char a,subject dummy)
+{
+	ofstream fout("attnsheetbms.bin",ios::binary|ios::app);
+	if(a=='P')
+	{
+		dummy.present++;
+		dummy.total++;
+	}
+	else if(a=='A' || a=='B')
+	{
+		dummy.total++;
+		dummy.day=get_day()->tm_mday;
+		dummy.month=get_day()->tm_mon+1;
+		dummy.year=get_day()->tm_year+1900;
+		if(a=='B')
+			strcpy(dummy.bunk,"yes");
+	}
+	fout.write((char*)&dummy,sizeof(dummy));
+	fout.close();
+}
+void subject::show_bms()
+{
+	subject bub;
+	ifstream fin("attnsheetbms.bin",ios::binary);
+	while(fin.read((char*)&bub,sizeof(bub)))
+	{
+		cout<<"days Present: "<<bub.present<<" / "<<bub.total<<endl;
+		cout<<bub.day<<"-"<<bub.month<<"-"<<bub.year<<endl;
+		if(compare(bub.bunk,"yes")==1)
+		{
+			cout<<"bunked:yes"<<endl;
+		}
+		if(bub.day!=0)
+		{
+			cout<<"absent:yes"<<endl;
+		}
+	}
+	fin.close();
+}
+///sub6
+void subject::writefile_cp(char a,subject dummy)
+{
+	ofstream fout("attnsheetcomp_prac.bin",ios::binary|ios::app);
+	if(a=='P')
+	{
+		dummy.present++;
+		dummy.total++;
+	}
+	else if(a=='A' || a=='B')
+	{
+		dummy.total++;
+		dummy.day=get_day()->tm_mday;
+		dummy.month=get_day()->tm_mon+1;
+		dummy.year=get_day()->tm_year+1900;
+		if(a=='B')
+			strcpy(dummy.bunk,"yes");
+	}
+	fout.write((char*)&dummy,sizeof(dummy));
+	fout.close();
+}
+void subject::show_cp()
+{
+	subject bub;
+	ifstream fin("attnsheetcomp_prac.bin",ios::binary);
+	while(fin.read((char*)&bub,sizeof(bub)))
+	{
+		cout<<"days Present: "<<bub.present<<" / "<<bub.total<<endl;
+		cout<<bub.day<<"-"<<bub.month<<"-"<<bub.year<<endl;
+		if(compare(bub.bunk,"yes")==1)
+		{
+			cout<<"bunked:yes"<<endl;
+		}
+		if(bub.day!=0)
+		{
+			cout<<"absent:yes"<<endl;
+		}
+	}
+	fin.close();
+}
+///p1
+void subject::writefile_ecp(char a,subject dummy)
+{
+	ofstream fout("attnsheetec_prac.bin",ios::binary|ios::app);
+	if(a=='P')
+	{
+		dummy.present++;
+		dummy.total++;
+	}
+	else if(a=='A' || a=='B')
+	{
+		dummy.total++;
+		dummy.day=get_day()->tm_mday;
+		dummy.month=get_day()->tm_mon+1;
+		dummy.year=get_day()->tm_year+1900;
+		if(a=='B')
+			strcpy(dummy.bunk,"yes");
+	}
+	fout.write((char*)&dummy,sizeof(dummy));
+	fout.close();
+}
+void subject::show_ecp()
+{
+	subject bub;
+	ifstream fin("attnsheetec_prac.bin",ios::binary);
+	while(fin.read((char*)&bub,sizeof(bub)))
+	{
+		cout<<"days Present: "<<bub.present<<" / "<<bub.total<<endl;
+		cout<<bub.day<<"-"<<bub.month<<"-"<<bub.year<<endl;
+		if(compare(bub.bunk,"yes")==1)
+		{
+			cout<<"bunked:yes"<<endl;
+		}
+		if(bub.day!=0)
+		{
+			cout<<"absent:yes"<<endl;
+		}
+	}
+	fin.close();
+}
+///p2
+void subject::writefile_workshop(char a,subject dummy)
+{
+	ofstream fout("attnsheetworkshop.bin",ios::binary|ios::app);
+	if(a=='P')
+	{
+		dummy.present++;
+		dummy.total++;
+	}
+	else if(a=='A' || a=='B')
+	{
+		dummy.total++;
+		dummy.day=get_day()->tm_mday;
+		dummy.month=get_day()->tm_mon+1;
+		dummy.year=get_day()->tm_year+1900;
+		if(a=='B')
+			strcpy(dummy.bunk,"yes");
+	}
+	fout.write((char*)&dummy,sizeof(dummy));
+	fout.close();
+}
+void subject::show_wrkshp()
+{
+	subject bub;
+	ifstream fin("attnsheetworkshop.bin",ios::binary);
+	while(fin.read((char*)&bub,sizeof(bub)))
+	{
+		cout<<"days Present: "<<bub.present<<" / "<<bub.total<<endl;
+		cout<<bub.day<<"-"<<bub.month<<"-"<<bub.year<<endl;
+		if(compare(bub.bunk,"yes")==1)
+		{
+			cout<<"bunked:yes"<<endl;
+		}
+		if(bub.day!=0)
+		{
+			cout<<"absent:yes"<<endl;
+		}
+	}
+	fin.close();
+}
+///p3
+void subject::writefile_prac(char a,subject dummy)
+{
+	ofstream fout("attnsheet_prac.bin",ios::binary|ios::app);
+	if(a=='P')
+	{
+		dummy.present++;
+		dummy.total++;
+	}
+	else if(a=='A' || a=='B')
+	{
+		dummy.total++;
+		dummy.day=get_day()->tm_mday;
+		dummy.month=get_day()->tm_mon+1;
+		dummy.year=get_day()->tm_year+1900;
+		if(a=='B')
+			strcpy(dummy.bunk,"yes");
+	}
+	fout.write((char*)&dummy,sizeof(dummy));
+	fout.close();
+}
+void subject::show_prac()
+{
+	subject bub;
+	ifstream fin("attnsheet_prac.bin",ios::binary);
+	while(fin.read((char*)&bub,sizeof(bub)))
+	{
+		cout<<"days Present: "<<bub.present<<" / "<<bub.total<<endl;
+		cout<<bub.day<<"-"<<bub.month<<"-"<<bub.year<<endl;
+		if(compare(bub.bunk,"yes")==1)
+		{
+			cout<<"bunked:yes"<<endl;
+		}
+		if(bub.day!=0)
+		{
+			cout<<"absent:yes"<<endl;
+		}
+	}
+	fin.close();
+}
+///p4
+/////////////////////////////////
+void day::enter_data(int n)//n = day of week
+{
+	char s1=' ';
+	char s2=' ';
+	char s3=' ';
+	char s4=' ';
+	char s5=' ';
+	char s6=' ';
+	char p1=' ';
+	char p2=' ';
+	char p3=' ';
+	char p4=' ';
+	cout<<"P= present A=absent B=mass bunk";
+    switch(n)
+	{
+		case 1: cout<<"  "<<sub1<<" : ";
+				cin>>s1;
+				cout<<"  "<<sub2<<" : ";
+				cin>>s2;
+				cout<<"  "<<sub4<<" : ";
+				cin>>s4;
+				cout<<"  "<<sub3<<" : ";
+				cin>>s3;
+				break;
+		case 2: cout<<"  "<<sub1<<" : ";
+				cin>>s1;
+				cout<<"  "<<sub3<<" : ";
+				cin>>s3;
+				cout<<"  "<<sub6<<" : ";
+				cin>>s6;
+				cout<<"  "<<sub2<<" : ";
+				cin>>s2;
+				cout<<"  "<<prac1<<" : ";
+				cin>>p1;
+				cout<<"  "<<prac2<<" : ";
+				cin>>p2;
+				break;
+		case 3: cout<<"  "<<sub5<<" : ";
+				cin>>s5;
+				cout<<"  "<<sub6<<" : ";
+				cin>>s6;
+				cout<<"  "<<sub3<<" : ";
+				cin>>s3;
+				cout<<"  "<<sub4<<" : ";
+				cin>>s4;
+				break;
+		case 4: cout<<"  "<<sub6<<" : ";
+				cin>>s6;
+				cout<<"  "<<sub1<<" : ";
+				cin>>s1;
+				cout<<"  "<<sub5<<" : ";
+				cin>>s5;
+				cout<<"  "<<prac3<<" : ";
+				cin>>p3;
+				break;
+		case 5: cout<<"  "<<sub3<<" : ";
+				cin>>s3;
+				cout<<"  "<<sub4<<" : ";
+				cin>>s4;
+				cout<<"  "<<sub2<<" : ";
+				cin>>s2;
+				cout<<"  "<<sub1<<" : ";
+				cin>>s1;
+				cout<<"  "<<prac4<<" : ";
+				cin>>p4;
+				break;
+	}
+	if(s1!=' ')
+	{
+	   writefile_math(s1,math);
+	}
+	if(s2!=' ')
+	{
+		writefile_comp(s2,comp);
+	}
+	if(s3!=' ')
+	{
+		writefile_et(s3,et);
+	}
+	if(s4!=' ')
+	{
+		writefile_ec(s4,ec);
+	}
+	if(s5!=' ')
+	{
+		writefile_english(s5,eng);
+	}
+	if(s6!=' ')
+	{
+		writefile_bms(s6,bms);
+	}
+	if(p1!=' ')
+	{
+		writefile_cp(p1,cp);
+	}
+	if(p2!=' ')
+	{
+		writefile_ecp(p2,ecp);
+	}
+	if(p3!=' ')
+	{
+		writefile_workshop(p3,wrkshp);
+	}
+	if(p4!=' ')
+	{
+		writefile_prac(p4,prc);
+	}
+}
+
+/// ///Independant functions///////
+void enter_attendance()
+{
+switch(get_day()->tm_wday)
+ {
+    case 1: monday.enter_data(1);
+            break;
+    case 2: tuesday.enter_data(2);
+            break;
+    case 3: wednesday.enter_data(3);
+            break;
+    case 4:thursday.enter_data(4);
+            break;
+    case 5: friday.enter_data(5);
+            break;
+    default: "Chill!!mahn..holiday today!";
+ }
+}
+
+void show_attendance()
+{
+	cout<<"    MENU "<<endl;
+	cout<<"press        subject"<<endl;
+	cout<<"  1           math"<<endl;
+	cout<<"  2           comp"<<endl;
+	cout<<"  3             et"<<endl;
+	cout<<"  4             ec"<<endl;
+	cout<<"  5        english"<<endl;
+	cout<<"  6            bms"<<endl;
+	cout<<"  7      comp prac"<<endl;
+	cout<<"  8        ec prac"<<endl;
+	cout<<"  9       workshop"<<endl;
+	cout<<"  10          prac"<<endl;
+	int ch1;
+	cin>>ch1;
+	switch(ch1)
+	{
+		case 1:math.show_math();
+			  break;
+		case 2:math.show_comp();
+			  break;
+		case 3:math.show_et();
+			  break;
+		case 4:math.show_ec();
+			  break;
+		case 5:math.show_eng();
+			  break;
+		case 6:math.show_bms();
+			  break;
+		case 7:math.show_cp();
+			  break;
+		case 8:math.show_ecp();
+			  break;
+		case 9:math.show_wrkshp();
+			  break;
+		case 10:math.show_prac();
+			  break;
+	}
+}
+
+void run_prog()
+{
+	int flag=0;
+	while(1)
+	{
+		cout<<"  ATTENDANCE PROGRAM"<<endl;
+		cout<<" press         option"<<endl;
+		cout<<"   1          enter attendance"<<endl;
+		cout<<"   2          view attendance"<<endl;
+		int ch2;
+		cin>>ch2;
+		switch(ch2)
+			{
+			case 1: enter_attendance();
+					break;
+			case 2: show_attendance();
+					break;
+			default:flag=1;
+			}
+		if(flag==0)
+			{
+				cout<<"Run Again? "<<endl;
+				char ch;
+				cin>>ch;
+				if(ch=='n' || ch=='N')
+					break;
+				else
+					system("cls");
+			}
+		else
+			{
+				system("cls");
+				cout<<" TRY AGAIN!"<<endl;
+			}
+	}
+}
+
+int main()
+{
+    cout<<"hello"<<endl;
+	run_prog();
+}
