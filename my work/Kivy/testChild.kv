@@ -1,0 +1,41 @@
+#filename:testChild.kv
+
+<FloatLayout>:
+    display:display
+    textSend:textSend
+    enter:enter
+
+    Button:
+        id:close
+        text:"X"
+        font_size:10
+        size_hint:.05,.025
+        pos_hint:{"x":.025,"y":0.975}
+        on_press:quit()
+        
+    Button:
+        id:resize
+        text:"<"
+        font_size:10
+        size_hint:.05,.025
+        pos_hint:{"x":.09,"y":0.975 }
+    Label:
+        id:display
+        halign:'left'
+        font_size:40
+        size_hint:1,.8
+        pos_hint:{"x":0,"y":.8}
+    TextInput:
+        id:textSend
+        text:"hello"
+        multiline:False
+        size_hint:.8,0.06
+        pos_hint:{"x":0,"y":.02}
+    Button:
+        id:enter
+        text:"Send"
+        font_size:30
+        size_hint:.2,0.06
+        pos_hint:{"x":.8,"y":.02}
+        on_press:root.btn()
+        

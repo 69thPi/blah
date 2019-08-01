@@ -1,0 +1,333 @@
+
+* {
+	box-sizing: border-box;
+}
+
+html{
+	scroll-behavior:smooth;
+	color:black; /* text color for entire page*/
+	background-color: black; /*background color for entire page*/
+}
+
+body{
+	margin:0px; /*no border spaces*/
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.flex{
+	display: flex;
+	flex-wrap: nowrap;
+}
+
+.pages{  /*the main page*/
+	margin:0px;
+	border:1px solid white;
+	height: 100vh;
+	background-size: cover;
+	overflow: hidden;
+	padding:0px;
+	opacity:0.8;
+}
+.slide{
+			position:absolute;
+			top:10%;
+			left:12%;
+			width:80%;
+			height:88%;
+			display: none;
+}
+
+/**************** setting the pages **************/
+#home{
+	background: url('res/back_alien.jpg') no-repeat;
+	background-size:100%;
+	border:1px solid black;
+}
+
+#introduction{
+	background-image:url('res/blue.jpg');
+}
+
+#goals{
+	background-image:url('res/green.jpg');
+}
+
+#projects{
+	background-image:url('res/gold.jpg');
+	opacity:1;
+}
+
+#skillsAndInterests{
+	background-image:url('res/redPink.jpg');
+	position: relative;
+}
+
+#contact{
+	background-image:url('res/Neo.jpg');
+	opacity:1;
+}
+/*************************************************************/
+/*          for JS           */
+/********* dynamic interface ************/
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.dot {
+  cursor: pointer;
+  height: 1.2vw;
+  width: 1.2vw;
+  margin: 0 0.3vw;
+  background-color: #bbb;
+  border-radius: 50%;
+	display:inline-block;
+  transition: background-color 0.6s ease;
+	border:2px solid black;
+}
+
+.active, .dot:hover {
+  background-color: #000;
+}
+/*****************************************************/
+/************** handling sizing events**************/
+[class*="col-"] {
+  float: left;
+	padding: 10px;
+}
+
+.col-7{width:7%;}
+.col-13{width:13%;}
+.col-31{width:31%;}
+.col-40{width:40%;}
+.col-60{width:60%;}
+
+.header{
+	height:18%;
+}
+
+img.auth{
+	width:70%;
+	height: auto;
+	border:10px solid white;
+	outline:5px solid black;
+}
+
+.img_cont{
+	text-align:center;
+	float:bottom-right;
+	width:30%
+}
+/*******************************************/
+/* **************decorations**************/
+.whiteBox{
+	position:absolute;
+	top:17.5%;
+	left:12%;
+	border-radius:40px;
+	background-color:rgba(255,255,255,0.8);
+	width:35%;
+	height:70%;
+}
+
+#home img{
+	position:absolute;
+	bottom:1.2%;
+	min-width:60%;
+	width:99.85%;
+	min-height: 70%;
+	max-height: 100%
+}
+
+.NavBar{  /*the hyperlink container  */
+		background-color:rgba(0, 0, 0,0.2);
+		text-align:center;
+		padding:2% 0% 2.1% 0%;
+		position:sticky;
+		top:0;
+		z-index: 4;
+		border-radius: 0px 0px 50px 50px;
+}
+
+.nav{     /*the hyperlinks */
+	background-color:rgb(50,80,100);
+	padding:1.1vw 3vw;
+	text-align:center;
+	text-decoration:none;
+	color:white;
+	font-family: 'Kalam', cursive;
+	outline: 0.3vw dashed rgb(250, 95, 106);
+	outline-offset: -0.3vw;
+	margin:0vw 1.5vw 0vw 1.5vw;
+}
+
+.up{  /****the hyper link button***/
+	padding:1vw 2vw;
+	margin-right:4vw;
+	outline:none;
+	background-color:DodgerBlue;
+	border-radius:7vw;
+	border:5px solid white;
+}
+
+.upTop{  /* the hyper link container  */
+		position:sticky;
+	  top:90vh;
+		text-align: right;
+		z-index:2;
+		padding:0px;
+
+}
+
+/************ landscape text formatting*************/
+.title{ /*text titles*/
+	font-family: 'Averia Sans Libre', cursive;
+	text-align:center;
+	margin: 0px;
+	padding:0px;
+}
+.quo1{ /*for intro quote*/
+	font-family: 'Berkshire Swash', cursive;
+	line-height:1.5;
+	padding-left: 7px;
+	letter-spacing:1px;
+}
+
+.imgdesc{ /* for image desc*/
+	font-family:'Kalam', cursive;
+
+}
+
+.quo2{  /*for goal quote*/
+	margin:0px;
+	padding:0px;
+	font-family: 'Fredericka the Great', cursive;
+}
+
+.content{  /*for text content*/
+	word-wrap:break-word;
+	text-align: justify;
+	font-family: 'Roboto Slab', serif;
+	padding:5px;
+}
+
+.uno{
+	text-align:center;
+}
+.dos{
+	text-align:center;
+}
+
+/*******************************************************
+
+
+
+above is evice independant
+
+beolow is stuff that is device dependant
+
+
+
+/*****************************************************/
+/* for higher definition displays use query here */
+
+@media (min-width:1025px){ /*for laptops & desktops*/
+/***********text formatting*****************/
+	.title{
+		font-size: 200%;
+	}
+	.content{  /*for text content*/
+		font-size: 100%;
+	}
+	.quo1{ /*for quotes*/
+		font-size:120%;
+	}
+	.imgdesc{
+		font-size: 109%;
+	}
+	.quo2{ /*for quotes*/
+		font-size:275%;
+	}
+	.uno{
+		padding:0% 14% 0% 14%;
+	}
+	.dos{
+		padding:0% 5% 0% 5%;
+	}
+}
+@media (min-width:768px) and (max-width:1024px) and (orientation:landscape){ /*for tablet screens and LCD screens non HD */
+/***********text formatting*****************/
+	.title{
+		font-size: 180%;
+	}
+	.content{  /*for text content*/
+		font-size: 85%;
+	}
+	.quo1{ /*for quotes*/
+		font-size:95%;
+	}
+	.imgdesc{
+		font-size: 109%;
+	}
+	.quo2{ /*for quotes*/
+		font-size:200%;
+	}
+	.uno{
+		padding:0% 3% 0% 3%;
+	}
+	.dos{
+		padding:0% 1% 0% 1%;
+	}
+}
+@media (max-width:767px)and (orientation:landscape){ /*for mobile phones */
+/***********text formatting*****************/
+	.title{
+		font-size: 120%;
+	}
+	.content{  /*for text content*/
+		font-size: 50%;
+	}
+	.quo1{ /*for quotes*/
+		font-size:55%;
+	}
+	.imgdesc{
+		font-size: 70%;
+	}
+	.quo2{ /*for quotes*/
+		font-size:150%;
+	}
+	.uno{
+		padding:0% 3% 0% 3%;
+	}
+	.dos{
+		padding:0% 1% 0% 1%;
+	}
+	.nav{
+		font-size:60%;
+	}
+}
