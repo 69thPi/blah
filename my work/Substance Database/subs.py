@@ -1,7 +1,7 @@
 class substance:
     def __init__(self):
         self.name='foo'
-        self.cont=[['oxygen',50],['carbon',50]]
+        self.cont=[['sample 1',50],['sample 2',50]]
         self.form='L'
         self.mWt = 0
         self.fPt = 0

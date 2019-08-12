@@ -73,6 +73,7 @@ class mainWidget(QWidget):
     def set_val(self):
         ik.txCnt=[]
         ik.txCnt.append(self.inp1.text())
+        into.append([self.txt1.text(),self.txt2.text()])#//add last added element
         ik.txCnt.append(into)# add into
         ik.txCnt.append(self.inp3.text())
         ik.txCnt.append(self.inp4.text())
