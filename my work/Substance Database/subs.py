@@ -8,8 +8,23 @@ class substance:
         self.bPt = 0 
         self.cmnts = 'None'
         self.pfrm = ['Isp','thrust','time']
+    def ed(self):
+        if selected_index==0 :
+            self.name=eDat
+        elif selected_index==2 :
+            self.form=eDat
+        elif selected_index==3 :
+            self.mWt=eDat
+        elif selected_index==4 :
+            self.fPt=eDat
+        elif selected_index==5 :
+            self.bPt=eDat
+        elif selected_index==6 :
+            self.cmnts=eDat
 
 arr=[]
 txCnt=['',[],'','','','','',''] #transfer content from GUI to variables
 selected_index=0
 foo=0 #holds what to select in pickMe substance or property
+into = []
+eDat=''

@@ -8,12 +8,16 @@ import sys
 from PyQt5.QtWidgets import (QApplication, QWidget, QPushButton, QTextEdit,
                              QHBoxLayout, QVBoxLayout)
 from PyQt5.QtCore import pyqtSlot
+import subs
 
-
-content = 'None' #set global across files
-
-def set_content(a):
-    content = a
+def set_content():
+    if subs.selected_index==1:
+        a=''
+        """for i in txCnt[1]:
+            a+=i[0]+':'+i[1]+'%;' # FIX THIS PART TO EDIT ELEMENTS"""
+    else:
+        a = subs.txCnt[subs.selected_index]
+    return a
  
 
 class mainWidget(QWidget):
@@ -27,8 +31,8 @@ class mainWidget(QWidget):
         cancel = QPushButton("Cancel")
         save.clicked.connect(self.save)
         cancel.clicked.connect(self.cancel)
-        textbox = QTextEdit(self)
-        textbox.setText(content)
+        self.textbox = QTextEdit(self)
+        self.textbox.setText(set_content())
         
         hbox = QHBoxLayout()
         hbox.addStretch(2)
@@ -38,7 +42,7 @@ class mainWidget(QWidget):
         hbox.addStretch(2)
 
         self.vbox = QVBoxLayout()
-        self.vbox.addWidget(textbox)
+        self.vbox.addWidget(self.textbox)
         self.vbox.addLayout(hbox)
     
     def initUI(self):
@@ -50,15 +54,17 @@ class mainWidget(QWidget):
 
     @pyqtSlot()
     def save(self):
-        #update and return content
+        subs.eDat=self.textbox.toPlainText()
         self.close()
     def cancel(self):
         self.close()
 
 
 #call to open window
-def edit_win(ty=1):
-    if ty==1:
+def edit_win():
         app = QApplication(sys.argv)
         ex = mainWidget()
-        app.exec_()   
+        app.exec_()
+
+if __name__=='__main__':
+    edit_win()

@@ -10,7 +10,7 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot,Qt
 import subs as ik
 
-into = []
+
 
 class MainWindow(QMainWindow):
 
@@ -44,10 +44,10 @@ class mainWidget(QWidget):
     def createDisp(self):
         self.grpBox = QGroupBox('',self)
         self.Vbox = QVBoxLayout(self.grpBox)
-        if len(into)!=0:
-            for i in range(len(into)):
-                self.txt1 = QLineEdit(into[i][0])
-                self.txt2 = QLineEdit(into[i][1])
+        if len(ik.into)!=0:
+            for i in range(len(ik.into)):
+                self.txt1 = QLineEdit(ik.into[i][0])
+                self.txt2 = QLineEdit(ik.into[i][1])
                 lay_htemp = QHBoxLayout()
                 lay_htemp.addWidget(self.txt1)
                 lay_htemp.addWidget(self.txt2)
@@ -73,8 +73,9 @@ class mainWidget(QWidget):
     def set_val(self):
         ik.txCnt=[]
         ik.txCnt.append(self.inp1.text())
-        into.append([self.txt1.text(),self.txt2.text()])#//add last added element
-        ik.txCnt.append(into)# add into
+        if self.txt2.text()!='':
+            ik.into.append([self.txt1.text(),self.txt2.text()])#//add last added element
+        ik.txCnt.append(ik.into)# add into
         ik.txCnt.append(self.inp3.text())
         ik.txCnt.append(self.inp4.text())
         ik.txCnt.append(self.inp5.text())
@@ -205,7 +206,7 @@ class mainWidget(QWidget):
         self.elm=self.txt1.text()
         self.perc=self.txt2.text()
         if self.elm!='':
-            into.append([self.elm,self.perc])
+            ik.into.append([self.elm,self.perc])
         self.parent.refresh()
            
 

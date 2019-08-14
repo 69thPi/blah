@@ -35,8 +35,16 @@ def write(filename):
         for n in range(1,len(s.arr[y].cont)):
             lines +=1
             sheet.cell(row=lines,column=3).value= s.arr[y].cont[n][0]
-            sheet.cell(row=lines,column=4).value= s.arr[y].cont[n][1]    
+            sheet.cell(row=lines,column=4).value= s.arr[y].cont[n][1]
     book.save(filename+'.xlsx')
+
+'''
+        if temp.name!= 'foo':
+            s.arr.append(temp)
+            temp = s.substance()
+        if temp.name=='': #last element
+            flag=0
+'''
 
 def read(filename):
     ign = 0
@@ -46,9 +54,6 @@ def read(filename):
     flag=1
     temp = s.substance()
     while flag==1:
-        if temp.name!= 'foo':
-            s.arr.append(temp)
-        temp = s.substance()
         ign = sheet.cell(row=r, column=1).value
         if ign != None:
             temp.name = sheet.cell(row=r,column=2).value
@@ -65,9 +70,17 @@ def read(filename):
                 temp.pfrm.append(sheet.cell(row=r,column=c).value)
                 c+=1
             r+=1
+            if sheet.cell(row=r,column=1).value!= None: #if there exists a next element in next line # for one element substances
+                s.arr.append(temp)
+                temp = s.substance()
         else:
-            if temp.name=='foo':
-                flag=0
-            else:
+            if sheet.cell(row=r,column=3).value!=None:
                 temp.cont.append([sheet.cell(row=r,column=3).value,sheet.cell(row=r,column=4).value])
                 r+=1
+            if sheet.cell(row=r,column=1).value!= None: #if there exists a next element in next line # for one element substances
+                s.arr.append(temp)
+                temp = s.substance()
+            if sheet.cell(row=r,column=3).value== None:
+                s.arr.append(temp)
+                flag=0
+            
