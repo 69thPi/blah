@@ -6,6 +6,7 @@ AIM: The aim of this program subset is to allow a choice of nozzle dimensions by
 
 USE: 1.Upon setting the values for combustion chamber pressure, temperature, 
                                             avg. mol mass and gamma for the exhaust
+                                            Thrust required and max operation altitude
                                             in file rocketEngine.py
       2.you can then call the method mk_noz(args), where the argument is the interval altitude at which you want your 
         engines to be designed.
