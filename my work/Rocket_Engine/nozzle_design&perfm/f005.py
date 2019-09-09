@@ -16,7 +16,7 @@ gam=re.gamma
 F =re.thrust 
 max_ht=re.alt
 file_name='Eng'+str(1)+'.xlsx'
-R=8.314 #kJ/kg-K
+R=8314 #J/kg-K
 
 def design(height,j): # p2==p3 optimal conditions from height (in pascals)
     ig=find(height*1000,'p')
@@ -81,7 +81,7 @@ def plot(x,ys,e):
         plt.plot(x,ys[i],label=e[i])
     plt.xlabel('Alt (km)')
     plt.ylabel('Cf')
-    #plt.legend()
+    plt.legend()
     plt.show()
 
     
@@ -112,7 +112,7 @@ def mk_noz(inc):
         if sheet.cell(row=1,column=2*col-1).value==None:
             data=False
         else:
-            e.append(float(sheet.cell(row=2,column=2*col-1).value))
+            e.append(float(sheet.cell(row=3,column=2*col-1).value))
             for i in range(1,max_ht):
                 if sheet.cell(row=i,column=2*col).value==None:
                     y.append(yz[0][0])
@@ -124,5 +124,5 @@ def mk_noz(inc):
 
     
 if __name__=='__main__':
-    mk_noz(5)
+    mk_noz(20)
 
