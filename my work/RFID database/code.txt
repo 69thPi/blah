@@ -1,0 +1,174 @@
+#include <SPI.h>
+#include <MFRC522.h>
+#include <ESP8266WiFi.h>
+#include <WiFiClient.h> 
+#include <ESP8266WebServer.h>
+#include <ESP8266HTTPClient.h>
+
+#define RST_PIN         0          // Configurable, see typical pin layout above
+#define SS_PIN          2         // Configurable, see typical pin layout above
+
+MFRC522 mfrc522(SS_PIN, RST_PIN);  // Create MFRC522 instance
+MFRC522::MIFARE_Key key;
+
+const char* ssid     = "Tanmay\xe2\x80\x99s iPhone";
+const char* password = "pyrad007";
+
+String Station= "St1";
+
+String preSerial="";//serial number style
+int sno=2000; //work piece index
+String mainSerial;
+byte bufferLen=18;
+int elapsed=30,save_t=0;
+
+bool baseStn=false;
+int blockNum=60;
+byte newBlockData [16]={0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; //Serial number to insert
+byte readBlockData[18];
+
+MFRC522::StatusCode status;
+
+void set_id()
+{
+  Serial.println(sno);
+  for(int i=0;i<16;i++){ //put serial number
+    newBlockData[i]=mainSerial[i];
+  }
+  sno=sno+1;
+}
+
+void setup() {
+  Serial.begin(115200);   // Initialize serial communications with the PC
+  while (!Serial);    // Do nothing if no serial port is opened (added for Arduinos based on ATMEGA32U4)
+  SPI.begin();      // Init SPI bus
+  mfrc522.PCD_Init();   // Init MFRC522 
+  if(Station=="St0"){
+  baseStn=true;
+  }
+  /////////////////////////////
+  pinMode(LED_BUILTIN, OUTPUT);
+  Serial.print("Connecting to ");
+  Serial.println(ssid);
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(100);
+    Serial.print(".");
+  }
+  digitalWrite(LED_BUILTIN,LOW);
+}
+
+  
+  String ipaddress="172.20.10.3";//server IP Address Fixed (Set Static from router)
+  String path = "/practice/index.php";
+  
+String set_url(String foo){
+  String getData = "?sno=" + foo + "&locn=" + Station;
+  String ext = "&chng=2&secs="+String(elapsed);
+  if(!baseStn)
+  {
+    getData+= ext;
+  }
+  
+  return "http://" + ipaddress + path + getData;
+  }
+
+void loop() {
+  
+  if ( ! mfrc522.PICC_IsNewCardPresent()) {
+    return;
+  }
+
+  // Select one of the cards
+  if ( ! mfrc522.PICC_ReadCardSerial()) {
+    return;
+  }
+  //mfrc522.PICC_HaltA();
+  //mfrc522.PCD_StopCrypto1();
+
+ Serial.print(F("Card UID:"));
+
+ for (byte i=0;i<mfrc522.uid.size; i++)
+ {
+  Serial.print(mfrc522.uid.uidByte[i] <0x10? "0" : " " );
+  Serial.print(mfrc522.uid.uidByte[i], HEX);
+  }
+  Serial.println(" ");
+        for (byte i=0;i<6;i++){
+        key.keyByte[i] = 0xFF;
+      }
+  //////////////////////////////////////////  
+  ///database talk
+  /////////////////////////////////////////
+  HTTPClient http;
+  /////////////////////////////////////////
+  if(baseStn) //inventory station
+   {
+      mainSerial=preSerial+String(sno);
+      Serial.print("serial number::");
+      Serial.println(mainSerial);
+      String url= set_url(mainSerial);
+        for (byte i=0;i<6;i++){
+            key.keyByte[i] = 0xFF;
+        }
+        //set new block data
+          for(int i=0;i<16;i++){ //put serial number
+            newBlockData[i]=mainSerial[i];
+            }
+        //
+      WriteDataToBlock(blockNum, newBlockData);
+      //update databsee with new item
+      http.begin(url);
+      while(http.GET()!=200);
+      http.end();
+      ///////////////////////////
+      set_id();//will print the number entered and update the serial number
+   }
+  else{ // work station
+     ReadDataFromBlock(blockNum, readBlockData);
+     char ig[18];
+     for (int j=0 ; j<16 ; j++)
+     {
+       //Serial.write(readBlockData[j]);
+       ig[j]=readBlockData[j];//not working
+       }
+      mainSerial=ig;
+     String url1= set_url(mainSerial);
+     //Serial.println(url1);
+     ///////////////////////////
+     //update database with station number.
+     //if no card is saved then 'save current time' and if card is saved then 
+     // subtract and store in elapsed.
+     http.begin(url1);
+     while(http.GET()!=200);
+     http.end();
+     Serial.println("Database updated");
+}
+
+}
+
+void WriteDataToBlock(int blockNum, byte newBlockData[]) 
+{
+  status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, blockNum, &key, &(mfrc522.uid));
+  if (status == MFRC522::STATUS_OK){
+    if (mfrc522.MIFARE_Write(blockNum, newBlockData, 16) == MFRC522::STATUS_OK){
+    Serial.println("Data was written into Block successfully");}
+  }
+  else{Serial.println("Authentication Error");}  
+}
+
+void ReadDataFromBlock(int blockNum, byte readBlockData[]) 
+{
+  byte status = mfrc522.PCD_Authenticate(MFRC522::PICC_CMD_MF_AUTH_KEY_A, blockNum, &key, &(mfrc522.uid));
+  if (status == MFRC522::STATUS_OK){
+     if( mfrc522.MIFARE_Read(blockNum, readBlockData, &bufferLen) == MFRC522::STATUS_OK){
+        Serial.println("Data was read from Block successfully");
+        }
+     else{
+      Serial.println("Error 101: Read issue");
+      }
+  }
+  else{
+    Serial.println("Error 102: Authentication issue");}
+}

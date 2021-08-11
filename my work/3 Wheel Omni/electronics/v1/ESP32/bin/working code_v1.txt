@@ -1,0 +1,64 @@
+#include<WiFi.h>
+#include<HTTPClient.h>
+
+String self="WK1";
+
+const char* ssid="black";
+const char* password="pyrad007";
+String hostIP="192.168.2.2";
+
+//target set values
+//path set, direction
+int tym[]={1,1};//in seconds // first element def 1;
+int dir[]={0};//if -1 ACK spin, -2 CK spin; # x axis is flipped
+unsigned long timer=0;
+unsigned long elapsed=0;
+unsigned long saved=0;
+void setup() {
+  Serial.begin(115200);
+  delay(500);
+  WiFi.begin(ssid, password);
+ 
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.print(".");
+  }
+  Serial.println(" ");
+  Serial.print("Connected to");
+  Serial.println(ssid);
+  Serial.print("IP Address:");
+  Serial.println(WiFi.localIP());
+}
+
+
+bool motion=false;
+void loop(){
+    elapsed=millis();
+    if(elapsed-timer>1000){ //at every one second== check cloud value if not in motion, else if in motion check if the time of initiate has has lapsed.
+      if(!motion){
+            if((WiFi.status()==WL_CONNECTED)){
+                  HTTPClient client;
+                  client.begin("http://"+hostIP+"/forPiece");
+                  int httpCode=client.GET();
+                  if(httpCode==200){
+                          String payload= client.getString();
+                          int indx=payload.indexOf(self)+3;// WK1+++
+                          String value=payload.substring(indx,indx+3);
+                          payload="";
+                          if (value.toInt()!=dir[0]){
+                               dir[0]=value.toInt();
+                               Serial.print(dir[0]);
+                               motion=true; //trigger motion routiene
+                          }
+                  client.end();
+                  }
+            }
+           else{
+           Serial.println("HTTP error:404");}
+           timer=elapsed;
+        }
+        else{
+          motion=false;// do motor subroutiene.
+          }
+      }    
+}
