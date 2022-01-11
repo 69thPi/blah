@@ -1,0 +1,143 @@
+import cv2 as cv
+import numpy as np
+import freenect as kinect
+import pyautogui as py
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Conv2D, MaxPooling2D, Dense, Flatten
+
+
+# Re-Build the model.
+model = Sequential([
+  Conv2D(9, (3,3) , input_shape=(370, 315, 1)),
+  MaxPooling2D(pool_size=4),
+  Conv2D(1, (3,3) , activation='relu'),
+  MaxPooling2D(pool_size=4),
+  Flatten(),
+  Dense(units=512, activation='relu'),
+  Dense(units=128, activation='relu'),
+  Dense(units=64, activation='relu'),
+  Dense(units=5, activation='softmax'),
+])
+
+# Load the model's saved weights.
+model.load_weights('v1.h5')
+
+params = cv.SimpleBlobDetector_Params()
+
+def set_params_min():
+    params.filterByArea=False
+    params.filterByCircularity=True
+    params.filterByConvexity=True
+    params.filterByInertia=True
+    params.minCircularity=.3
+    params.minConvexity=.1
+    params.minInertiaRatio=.1
+
+set_params_min()
+
+def get_feed(Tr=180):
+    video,_ = kinect.sync_get_video(0,kinect.VIDEO_IR_10BIT)
+    np.clip(video, 0, 2**10-1,video)
+    video >>=2
+    video=video.astype(np.uint8)
+    mask1=np.where(video<Tr,0,video) #minFilter
+    mask1=np.where(mask1>Tr,255,mask1) #maxFilter
+    mask2=cv.medianBlur(mask1,9)
+    mask2=cv.medianBlur(mask2,9)
+    return mask2
+
+def get_moments(mask):
+    moments=cv.moments(mask2)
+    x = int(moments ["m10"] / moments["m00"])
+    y = int(moments ["m01"] / moments["m00"])
+    return x,y
+    
+
+def set_ML(mask2): #median and cropped
+    try:
+        x,y=get_moments(mask)
+        crop=mask2[y-200:y+170,x-135:x+180]
+        crop= (crop/255) -.5
+        if crop.shape[0]==370 and crop.shape[1]==315:
+            return crop
+        else:
+            return np.zeros((370,315))
+    except:
+        return np.zeros((370,315))
+
+def run_ID(surface):
+    inp_mask=set_ML(surface)
+    lst=[]
+    lst.append(inp_mask)
+    lst=np.expand_dims(lst, axis=3)
+    predictions=model.predict(lst)
+    guess=np.argmax(predictions,axis=1)
+    return(str(guess[0]))
+    
+
+def get_points(frame):
+    frame=255-frame
+    detector= cv.SimpleBlobDetector_create(params)
+    mask2=cv.blur(frame,(80,80))
+    mask3=np.where(mask2<223,0,mask2) #minFilter
+    mask3=np.where(mask3>223,255,mask3) #maxFilter
+    keypoints= detector.detect(mask3)
+    return keypoints
+
+del_x=del_y=x_old=y_old=0
+
+def get_deltas(dots):
+    global del_x,del_y
+    global x_old,y_old
+    if(len(dots)>0):
+        coord=np.split(points[0],2)
+        x=int(coord[0][0].item())
+        y=int(coord[1][0].item())
+        if(x!=x_old and y!=y_old):
+            del_x=x-x_old
+            del_y=y-y_old
+            x_old=x
+            y_old=y
+    if(abs(del_x)<50 and abs(del_y)<50):
+        if (abs(del_x)>15):
+            del_x*=1
+        if (abs(del_y)>15):
+            del_x*=1
+    else:
+        del_x=del_y=0
+    return del_x,del_y
+
+saved=2
+detect=False
+cnt=0
+while(True):
+    frame = get_feed(200)
+    count=int(run_ID(frame))
+    if (saved!=count):
+        saved=count
+        detect=False
+        cnt+=1
+        if(cnt>2):
+            cnt=0
+            detect=True
+    else:
+        detect=False
+    keypoints=get_points(frame)
+    points=cv.KeyPoint_convert(keypoints)
+    dx,dy=get_deltas(points)
+    py.move(-dx,dy)
+    del_x=del_y=0
+    if(detect):
+        if (count==1):
+            py.click(button='left')
+        elif (count==3):
+            py.click(button='right')
+    frame=cv.resize(frame,(160,120),interpolation=cv.INTER_LINEAR)
+    im_with_keypoints = cv.drawKeypoints(frame, keypoints, np.array([]), (0,0,255,-1), cv.DRAW_MATCHES_FLAGS_DEFAULT)
+    cv.imshow('frame',im_with_keypoints)
+    k=cv.waitKey(1) & 0xff
+    if k==27:
+        break
+cv.destroyAllWindows()
+
+ 
